@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Compare Resume and Job</title>
+</head>
+<body>
+
+<h2>Compare Resume with Job</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Select Resume:</label>
+    <select name="resume_id">
+        {% for resume in resumes %}
+            <option value="{{ resume.id }}">{{ resume.title }}</option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <label>Select Job:</label>
+    <select name="job_id">
+        {% for job in jobs %}
+            <option value="{{ job.id }}">{{ job.title }}</option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <button type="submit">Compare</button>
+</form>
+
+{% if result %}
+    <h3>Overall Match: {{ result.overall_match_percentage }}%</h3>
+
+    {% for category, data in result.category_match.items %}
+        <h4>{{ category }}</h4>
+        <p>Matched: {{ data.matched }}</p>
+        <p>Missing: {{ data.missing }}</p>
+        <p>Category Match: {{ data.percentage }}%</p>
+    {% endfor %}
+{% endif %}
+
+</body>
+</html>

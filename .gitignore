@@ -1,0 +1,17 @@
+# Django
+backend/venv/
+__pycache__/
+*.pyc
+backend/db.sqlite3
+.env
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
