@@ -33,12 +33,22 @@
 
 {% if result %}
     <h3>Overall Match: {{ result.overall_match_percentage }}%</h3>
+    <h3>Recommended Skills to Learn</h3>
+
+    {% for rec in result.recommendations %}
+        <p>
+            Learn <strong>{{ rec.skill }}</strong> 
+            (Category: {{ rec.category }}, Priority: {{ rec.priority }})
+        </p>
+    {% endfor %}    
+
 
     {% for category, data in result.category_match.items %}
         <h4>{{ category }}</h4>
         <p>Matched: {{ data.matched }}</p>
         <p>Missing: {{ data.missing }}</p>
         <p>Category Match: {{ data.percentage }}%</p>
+        <p>Weight: {{ data.weight }}</p>
     {% endfor %}
 {% endif %}
 
