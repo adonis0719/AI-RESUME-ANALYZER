@@ -6,6 +6,7 @@ import docx
 from analyzer.skill_extractor import extract_skills
 from django.contrib.auth.decorators import login_required
 
+
 def home(request):
     return render(request, 'home.html')
 
@@ -49,8 +50,19 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import ResumeSerializer
 
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes
+
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def resume_list_api(request):
     resumes = Resume.objects.filter(user=request.user)
     serializer = ResumeSerializer(resumes, many=True)
     return Response(serializer.data)
+
+
+
+
+
+
+

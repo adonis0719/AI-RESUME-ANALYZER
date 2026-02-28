@@ -1,4 +1,4 @@
-#!C:\Sunil S\Quest\Resume Analyzer\env\Scripts\python.exe
+#!C:\Sunil S\Quest\Resume Analyzer\backend\env\Scripts\python.exe
 """A command line tool for extracting text and images from PDF and
 output it to plain text, html, xml or tags.
 """

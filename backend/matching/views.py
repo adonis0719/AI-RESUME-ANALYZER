@@ -31,7 +31,11 @@ def compare(request):
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes
+
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def compare_api(request):
     resume_id = request.data.get('resume_id')
     job_id = request.data.get('job_id')

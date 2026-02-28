@@ -1,4 +1,4 @@
-#!C:\Sunil S\Quest\Resume Analyzer\env\Scripts\python.exe
+#!C:\Sunil S\Quest\Resume Analyzer\backend\env\Scripts\python.exe
 """Extract pdf structure in XML format"""
 
 import logging

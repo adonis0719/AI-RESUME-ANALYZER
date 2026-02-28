@@ -30,7 +30,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import JobSerializer
 
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes
+
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def job_list_api(request):
     jobs = JobDescription.objects.filter(user=request.user)
     serializer = JobSerializer(jobs, many=True)
