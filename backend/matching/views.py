@@ -2,11 +2,12 @@ from django.shortcuts import render
 from resumes.models import Resume
 from jobs.models import JobDescription
 from .matcher import calculate_match
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def compare(request):
-    resumes = Resume.objects.all()
-    jobs = JobDescription.objects.all()
-
+    resumes = Resume.objects.filter(user=request.user)
+    jobs = JobDescription.objects.filter(user=request.user)    
     result = None
 
     if request.method == 'POST':
