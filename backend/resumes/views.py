@@ -43,3 +43,14 @@ def upload_resume(request):
         form = ResumeUploadForm()
 
     return render(request, 'upload.html', {'form': form})
+
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import ResumeSerializer
+
+@api_view(['GET'])
+def resume_list_api(request):
+    resumes = Resume.objects.filter(user=request.user)
+    serializer = ResumeSerializer(resumes, many=True)
+    return Response(serializer.data)

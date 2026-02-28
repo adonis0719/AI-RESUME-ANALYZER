@@ -24,3 +24,21 @@ def compare(request):
         'jobs': jobs,
         'result': result
     })
+
+
+
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+@api_view(['POST'])
+def compare_api(request):
+    resume_id = request.data.get('resume_id')
+    job_id = request.data.get('job_id')
+
+    resume = Resume.objects.get(id=resume_id, user=request.user)
+    job = JobDescription.objects.get(id=job_id, user=request.user)
+
+    result = calculate_match(resume.skills or {}, job.extracted_skills or {})
+
+    return Response(result)

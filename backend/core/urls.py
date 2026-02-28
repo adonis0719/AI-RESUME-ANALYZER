@@ -8,6 +8,12 @@ from jobs.views import upload_job
 from matching.views import compare
 from accounts.views import register, user_login, user_logout
 
+
+from resumes.views import resume_list_api
+from jobs.views import job_list_api
+from matching.views import compare_api
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
@@ -17,6 +23,9 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),
+    path('api/resumes/', resume_list_api),
+    path('api/jobs/', job_list_api),
+    path('api/compare/', compare_api),
 ]
 
 if settings.DEBUG:

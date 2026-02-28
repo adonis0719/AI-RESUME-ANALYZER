@@ -21,3 +21,17 @@ def upload_job(request):
         form = JobForm()
 
     return render(request, 'job_upload.html', {'form': form})
+
+
+
+
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import JobSerializer
+
+@api_view(['GET'])
+def job_list_api(request):
+    jobs = JobDescription.objects.filter(user=request.user)
+    serializer = JobSerializer(jobs, many=True)
+    return Response(serializer.data)
