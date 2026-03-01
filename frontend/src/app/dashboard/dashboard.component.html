@@ -1,8 +1,30 @@
+<h2>Compare Resume With Job</h2>
+
+<label>Select Resume:</label>
+<select [(ngModel)]="selectedResumeId">
+  <option *ngFor="let r of resumes" [value]="r.id">
+    {{ r.title }}
+  </option>
+</select>
+
+<br><br>
+
+<label>Select Job:</label>
+<select [(ngModel)]="selectedJobId">
+  <option *ngFor="let j of jobs" [value]="j.id">
+    {{ j.title }}
+  </option>
+</select>
+
+<br><br>
+
+<button (click)="compare()">Compare</button>
+
+<hr>
+
 <div *ngIf="result">
 
-  <h2>
-    Overall Match: {{ result.overall_match_percentage }}%
-  </h2>
+  <h2>Overall Match: {{ result.overall_match_percentage }}%</h2>
 
   <h3>Recommended Skills</h3>
   <ul>
@@ -26,10 +48,6 @@
 
     <p><strong>Category Match:</strong>
       {{ category.value.percentage }}%
-    </p>
-
-    <p><strong>Weight:</strong>
-      {{ category.value.weight }}
     </p>
 
     <hr>

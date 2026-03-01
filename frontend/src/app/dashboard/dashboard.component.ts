@@ -1,24 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CompareService } from '../services/compare.service';
-
-interface CategoryDetail {
-  matched: string[];
-  missing: string[];
-  percentage: number;
-  weight: number;
-}
-
-interface Recommendation {
-  skill: string;
-  category: string;
-  priority: number;
-}
-
-interface CompareResult {
-  overall_match_percentage: number;
-  category_match: { [key: string]: CategoryDetail };
-  recommendations: Recommendation[];
-}
+import { CompareService, CompareResult } from '../services/compare.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,18 +8,46 @@ interface CompareResult {
 })
 export class DashboardComponent implements OnInit {
 
+  resumes: any[] = [];
+  jobs: any[] = [];
+
+  selectedResumeId?: number;
+  selectedJobId?: number;
+
   result?: CompareResult;
 
-  constructor(private compareService: CompareService) {}
+  private apiUrl = 'http://127.0.0.1:8000/api';
+
+  constructor(
+    private http: HttpClient,
+    private compareService: CompareService
+  ) {}
 
   ngOnInit() {
-    this.compareService.compare(12, 6).subscribe({
-      next: (res: CompareResult) => {
+    this.loadResumes();
+    this.loadJobs();
+  }
+
+  loadResumes() {
+    this.http.get<any[]>(`${this.apiUrl}/resumes/`)
+      .subscribe(res => {
+        this.resumes = res;
+      });
+  }
+
+  loadJobs() {
+    this.http.get<any[]>(`${this.apiUrl}/jobs/`)
+      .subscribe(res => {
+        this.jobs = res;
+      });
+  }
+
+  compare() {
+    if (!this.selectedResumeId || !this.selectedJobId) return;
+
+    this.compareService.compare(this.selectedResumeId, this.selectedJobId)
+      .subscribe(res => {
         this.result = res;
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
+      });
   }
 }

@@ -32,6 +32,7 @@ from .serializers import JobSerializer
 
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
+from .models import JobDescription
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
