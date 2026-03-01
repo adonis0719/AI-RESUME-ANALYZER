@@ -1,0 +1,56 @@
+<h2>Dashboard</h2>
+
+<div *ngFor="let resume of resumes" style="border:1px solid #ccc; padding:15px; margin:15px;">
+
+  <h3>{{ resume.title }}</h3>
+
+  <p><strong>Uploaded:</strong> {{ resume.uploaded_at }}</p>
+
+  <p><strong>Extracted Text Preview:</strong></p>
+  <p>{{ resume.extracted_text | slice:0:150 }}...</p>
+
+  <h4>Skills</h4>
+
+  <div *ngIf="resume.skills">
+
+    <p><strong>Programming:</strong>
+      <span *ngFor="let s of resume.skills.programming_languages">
+        {{ s }} 
+      </span>
+    </p>
+
+    <p><strong>Frameworks:</strong>
+      <span *ngFor="let s of resume.skills.frameworks">
+        {{ s }} 
+      </span>
+    </p>
+
+    <p><strong>Web Technologies:</strong>
+      <span *ngFor="let s of resume.skills.web_technologies">
+        {{ s }} 
+      </span>
+    </p> 
+    
+    <p><strong>Databases:</strong>
+      <span *ngFor="let s of resume.skills.databases">
+        {{ s }} 
+      </span>
+    </p>    
+
+    <p><strong>Tools:</strong>
+      <span *ngFor="let s of resume.skills.tools">
+        {{ s }} 
+      </span>
+    </p>     
+
+    <p><strong>Concepts:</strong>
+      <span *ngFor="let s of resume.skills.concepts">
+        {{ s }} 
+      </span>
+    </p>
+
+  </div>
+
+</div>
+
+
