@@ -1,26 +1,43 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { CompareService } from '../services/compare.service';
+
+interface CategoryDetail {
+  matched: string[];
+  missing: string[];
+  percentage: number;
+  weight: number;
+}
+
+interface Recommendation {
+  skill: string;
+  category: string;
+  priority: number;
+}
+
+interface CompareResult {
+  overall_match_percentage: number;
+  category_match: { [key: string]: CategoryDetail };
+  recommendations: Recommendation[];
+}
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
 
-  resumes: any[] = [];
+  result?: CompareResult;
 
-  constructor(private authService: AuthService) {}
+  constructor(private compareService: CompareService) {}
 
-  ngOnInit(): void {
-    this.authService.getResumes().subscribe(
-      (data: any) => {
-        console.log("Resumes loaded:", data);
-        this.resumes = data;
+  ngOnInit() {
+    this.compareService.compare(12, 6).subscribe({
+      next: (res: CompareResult) => {
+        this.result = res;
       },
-      (error: any) => {
-        console.log("Error loading resumes:", error);
+      error: (err) => {
+        console.log(err);
       }
-    );
+    });
   }
 }

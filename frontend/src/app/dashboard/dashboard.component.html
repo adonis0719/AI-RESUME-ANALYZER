@@ -1,56 +1,38 @@
-<h2>Dashboard</h2>
+<div *ngIf="result">
 
-<div *ngFor="let resume of resumes" style="border:1px solid #ccc; padding:15px; margin:15px;">
+  <h2>
+    Overall Match: {{ result.overall_match_percentage }}%
+  </h2>
 
-  <h3>{{ resume.title }}</h3>
+  <h3>Recommended Skills</h3>
+  <ul>
+    <li *ngFor="let rec of result.recommendations">
+      {{ rec.skill }} ({{ rec.category }})
+    </li>
+  </ul>
 
-  <p><strong>Uploaded:</strong> {{ resume.uploaded_at }}</p>
+  <hr>
 
-  <p><strong>Extracted Text Preview:</strong></p>
-  <p>{{ resume.extracted_text | slice:0:150 }}...</p>
+  <div *ngFor="let category of result.category_match | keyvalue">
+    <h4>{{ category.key }}</h4>
 
-  <h4>Skills</h4>
-
-  <div *ngIf="resume.skills">
-
-    <p><strong>Programming:</strong>
-      <span *ngFor="let s of resume.skills.programming_languages">
-        {{ s }} 
-      </span>
+    <p><strong>Matched:</strong>
+      {{ category.value.matched.join(', ') }}
     </p>
 
-    <p><strong>Frameworks:</strong>
-      <span *ngFor="let s of resume.skills.frameworks">
-        {{ s }} 
-      </span>
+    <p><strong>Missing:</strong>
+      {{ category.value.missing.join(', ') }}
     </p>
 
-    <p><strong>Web Technologies:</strong>
-      <span *ngFor="let s of resume.skills.web_technologies">
-        {{ s }} 
-      </span>
-    </p> 
-    
-    <p><strong>Databases:</strong>
-      <span *ngFor="let s of resume.skills.databases">
-        {{ s }} 
-      </span>
-    </p>    
-
-    <p><strong>Tools:</strong>
-      <span *ngFor="let s of resume.skills.tools">
-        {{ s }} 
-      </span>
-    </p>     
-
-    <p><strong>Concepts:</strong>
-      <span *ngFor="let s of resume.skills.concepts">
-        {{ s }} 
-      </span>
+    <p><strong>Category Match:</strong>
+      {{ category.value.percentage }}%
     </p>
 
+    <p><strong>Weight:</strong>
+      {{ category.value.weight }}
+    </p>
+
+    <hr>
   </div>
 
 </div>
-
-
