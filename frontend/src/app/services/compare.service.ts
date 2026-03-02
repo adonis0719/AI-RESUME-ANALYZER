@@ -19,6 +19,8 @@ export interface CompareResult {
   overall_match_percentage: number;
   category_match: { [key: string]: CategoryDetail };
   recommendations: Recommendation[];
+  interview_questions: string[];
+  
 }
 
 @Injectable({
