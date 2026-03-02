@@ -1,16 +1,130 @@
-.card {
-  border-radius: 12px;
+/* ===== THEMES ===== */
+
+.light {
+  --bg: #f8f9fa;
+  --card: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --border: #e5e7eb;
 }
 
-.progress {
+.dark {
+  --bg: #111827;
+  --card: #1f2937;
+  --text: #f9fafb;
+  --muted: #9ca3af;
+  --border: #374151;
+}
+
+/* ===== LAYOUT ===== */
+
+.dashboard {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 50px 20px;
+}
+
+.container-main {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.subtitle {
+  color: var(--muted);
+}
+
+.card-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+/* ===== INPUT ===== */
+
+.input-clean {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.input-clean:focus {
+  box-shadow: none;
+}
+
+/* ===== SCORE ===== */
+
+.score-box {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.score-number {
+  font-size: 60px;
+  font-weight: 700;
+}
+
+.score-label {
+  color: var(--muted);
+}
+
+/* ===== CATEGORY CARD ===== */
+
+.category-card {
+  border: 1px solid var(--border);
+  padding: 20px;
   border-radius: 10px;
 }
 
-.badge {
-  font-size: 0.9rem;
-  border-radius: 8px;
+.percentage {
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
-h4, h5 {
-  font-weight: 600;
+/* ===== CHIPS ===== */
+
+.chip {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin: 4px 6px 4px 0;
+}
+
+.success {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.danger {
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+
+/* ===== QUESTIONS ===== */
+
+.question-list {
+  padding-left: 20px;
+}
+
+.question-list li {
+  margin-bottom: 10px;
+}
+
+/* ===== THEME BUTTON ===== */
+
+.theme-btn {
+  border: 1px solid var(--border);
+  background: var(--card);
+  padding: 6px 18px;
+  border-radius: 30px;
 }

@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html'
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
 
@@ -21,6 +22,8 @@ export class DashboardComponent implements OnInit {
 
   jobTitle = '';
   jobText = '';
+
+  currentTheme: string = 'light';
 
   private apiUrl = 'http://127.0.0.1:8000/api';
 
@@ -48,7 +51,7 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  // 👇 ADD THESE BELOW loadJobs()
+  
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
@@ -89,5 +92,10 @@ export class DashboardComponent implements OnInit {
       .subscribe(res => {
         this.result = res;
       });
+  }
+
+  toggleTheme() {
+    this.currentTheme =
+      this.currentTheme === 'light' ? 'dark' : 'light';
   }
 }

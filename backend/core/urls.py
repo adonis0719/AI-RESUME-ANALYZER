@@ -7,6 +7,7 @@ from resumes.views import upload_resume
 from jobs.views import upload_job
 from matching.views import compare
 from accounts.views import register, user_login, user_logout
+from accounts.views import register_api
 
 
 from resumes.views import resume_list_api
@@ -33,6 +34,7 @@ urlpatterns = [
     path('api/compare/', compare_api),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/register/', register_api),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,21 @@
+<div class="container mt-5">
+  <h2>Sign Up</h2>
+
+  <input class="form-control mb-2"
+         placeholder="Username"
+         [(ngModel)]="username">
+
+  <input class="form-control mb-2"
+         placeholder="Email"
+         [(ngModel)]="email">
+
+  <input class="form-control mb-2"
+         type="password"
+         placeholder="Password"
+         [(ngModel)]="password">
+
+  <button class="btn btn-primary"
+          (click)="register()">
+    Register
+  </button>
+</div>

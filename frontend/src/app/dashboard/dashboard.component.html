@@ -1,59 +1,71 @@
-<div class="container mt-4">
+<div class="dashboard" [ngClass]="currentTheme">
 
-  <h2 class="text-center mb-4">AI Resume Analyzer Dashboard</h2>
+  <div class="container-main">
 
-  <!-- Upload Section -->
-  <div class="card mb-4">
-    <div class="card-body">
+    <!-- HEADER -->
+    <div class="header">
+      <div>
+        <h1>AI Resume Analyzer</h1>
+        <p class="subtitle">
+          Compare resumes with job descriptions intelligently
+        </p>
+      </div>
 
-      <h4>Upload Resume</h4>
-
-      <input class="form-control mb-2"
-             type="text"
-             placeholder="Resume Title"
-             [(ngModel)]="resumeTitle">
-
-      <input class="form-control mb-2"
-             type="file"
-             accept=".pdf"
-             (change)="onFileSelected($event)">
-
-      <button class="btn btn-primary"
-              (click)="uploadResume()">
-        Upload Resume
+      <button class="theme-btn" (click)="toggleTheme()">
+        {{ currentTheme === 'light' ? 'Dark Mode' : 'Light Mode' }}
       </button>
-
-      <hr>
-
-      <h4>Upload Job Description</h4>
-
-      <input class="form-control mb-2"
-             type="text"
-             placeholder="Job Title"
-             [(ngModel)]="jobTitle">
-
-      <textarea class="form-control mb-2"
-                rows="5"
-                placeholder="Paste Job Description"
-                [(ngModel)]="jobText"></textarea>
-
-      <button class="btn btn-success"
-              (click)="uploadJob()">
-        Upload Job
-      </button>
-
     </div>
-  </div>
 
-  <!-- Compare Section -->
-  <div class="card mb-4">
-    <div class="card-body">
+    <!-- UPLOAD SECTION -->
+    <div class="card-section">
+      <div class="row g-5">
 
-      <h4>Compare Resume with Job</h4>
+        <div class="col-md-6">
+          <h5 class="section-title">Resume</h5>
 
-      <div class="row">
+          <input class="form-control input-clean mb-3"
+                 placeholder="Resume Title"
+                 [(ngModel)]="resumeTitle">
+
+          <input class="form-control input-clean mb-3"
+                 type="file"
+                 (change)="onFileSelected($event)">
+
+          <button class="btn btn-primary w-100"
+                  (click)="uploadResume()">
+            Upload Resume
+          </button>
+        </div>
+
+        <div class="col-md-6">
+          <h5 class="section-title">Job Description</h5>
+
+          <input class="form-control input-clean mb-3"
+                 placeholder="Job Title"
+                 [(ngModel)]="jobTitle">
+
+          <textarea class="form-control input-clean mb-3"
+                    rows="6"
+                    placeholder="Paste Job Description"
+                    [(ngModel)]="jobText"></textarea>
+
+          <button class="btn btn-success w-100"
+                  (click)="uploadJob()">
+            Upload Job
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- COMPARE SECTION -->
+    <div class="card-section">
+      <h5 class="section-title mb-4">Compare</h5>
+
+      <div class="row g-3 align-items-end">
         <div class="col-md-5">
-          <select class="form-select"
+          <label>Resume</label>
+          <select class="form-select input-clean"
                   [(ngModel)]="selectedResumeId">
             <option value="">Select Resume</option>
             <option *ngFor="let r of resumes" [value]="r.id">
@@ -63,7 +75,8 @@
         </div>
 
         <div class="col-md-5">
-          <select class="form-select"
+          <label>Job</label>
+          <select class="form-select input-clean"
                   [(ngModel)]="selectedJobId">
             <option value="">Select Job</option>
             <option *ngFor="let j of jobs" [value]="j.id">
@@ -72,75 +85,79 @@
           </select>
         </div>
 
-        <div class="col-md-2">
-          <button class="btn btn-dark w-100"
+        <div class="col-md-2 d-grid">
+          <button class="btn btn-dark"
                   (click)="compare()">
             Compare
           </button>
         </div>
       </div>
-
     </div>
-  </div>
 
-  <!-- Result Section -->
-  <div *ngIf="result" class="card">
-    <div class="card-body">
+    <!-- RESULTS -->
+    <div *ngIf="result" class="card-section">
 
-      <h3>Overall Match</h3>
-
-      <div class="progress mb-3" style="height: 25px;">
-        <div class="progress-bar"
-             role="progressbar"
-             [style.width.%]="result.overall_match_percentage">
+      <!-- OVERALL SCORE -->
+      <div class="score-box">
+        <div class="score-number">
           {{ result.overall_match_percentage }}%
         </div>
+        <div class="score-label">Overall Match</div>
       </div>
-
-      <h4>Recommended Skills</h4>
-      <ul>
-        <li *ngFor="let rec of result.recommendations">
-          {{ rec.skill }} ({{ rec.category }})
-        </li>
-      </ul>
 
       <hr>
 
-      <div *ngFor="let category of result.category_match | keyvalue">
-        <h5 class="text-capitalize">
-          {{ category.key.replace('_', ' ') }}
-        </h5>
+      <!-- CATEGORY BREAKDOWN -->
+      <div class="row g-4 mt-2">
 
-        <div class="progress mb-2">
-          <div class="progress-bar bg-info"
-               [style.width.%]="category.value.percentage">
-            {{ category.value.percentage }}%
+        <div class="col-md-6"
+             *ngFor="let category of result.category_match | keyvalue">
+
+          <div class="category-card">
+
+            <h6 class="text-capitalize">
+              {{ category.key.replace('_',' ') }}
+            </h6>
+
+            <p class="percentage">
+              {{ category.value.percentage }}% Match
+            </p>
+
+            <div class="skill-group">
+              <strong>Matched</strong>
+              <div class="chip success"
+                   *ngFor="let skill of category.value.matched">
+                {{ skill }}
+              </div>
+            </div>
+
+            <div class="skill-group mt-2">
+              <strong>Missing</strong>
+              <div class="chip danger"
+                   *ngFor="let skill of category.value.missing">
+                {{ skill }}
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <p><strong>Matched:</strong>
-          {{ category.value.matched.join(', ') }}
-        </p>
-
-        <p><strong>Missing:</strong>
-          {{ category.value.missing.join(', ') }}
-        </p>
-
-        <hr>
-
-
       </div>
 
-        <hr>
+      <hr class="my-4">
 
-        <h4>Interview Questions</h4>
-        <ul>
+      <!-- INTERVIEW QUESTIONS -->
+      <div>
+        <h5 class="section-title">Interview Questions</h5>
+
+        <ul class="question-list">
           <li *ngFor="let q of result.interview_questions">
             {{ q }}
           </li>
         </ul>
+      </div>
 
     </div>
-  </div>
 
+  </div>
 </div>
