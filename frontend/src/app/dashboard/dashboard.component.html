@@ -1,56 +1,135 @@
-<h2>Compare Resume With Job</h2>
+<div class="container mt-4">
 
-<label>Select Resume:</label>
-<select [(ngModel)]="selectedResumeId">
-  <option *ngFor="let r of resumes" [value]="r.id">
-    {{ r.title }}
-  </option>
-</select>
+  <h2 class="text-center mb-4">AI Resume Analyzer Dashboard</h2>
 
-<br><br>
+  <!-- Upload Section -->
+  <div class="card mb-4">
+    <div class="card-body">
 
-<label>Select Job:</label>
-<select [(ngModel)]="selectedJobId">
-  <option *ngFor="let j of jobs" [value]="j.id">
-    {{ j.title }}
-  </option>
-</select>
+      <h4>Upload Resume</h4>
 
-<br><br>
+      <input class="form-control mb-2"
+             type="text"
+             placeholder="Resume Title"
+             [(ngModel)]="resumeTitle">
 
-<button (click)="compare()">Compare</button>
+      <input class="form-control mb-2"
+             type="file"
+             accept=".pdf"
+             (change)="onFileSelected($event)">
 
-<hr>
+      <button class="btn btn-primary"
+              (click)="uploadResume()">
+        Upload Resume
+      </button>
 
-<div *ngIf="result">
+      <hr>
 
-  <h2>Overall Match: {{ result.overall_match_percentage }}%</h2>
+      <h4>Upload Job Description</h4>
 
-  <h3>Recommended Skills</h3>
-  <ul>
-    <li *ngFor="let rec of result.recommendations">
-      {{ rec.skill }} ({{ rec.category }})
-    </li>
-  </ul>
+      <input class="form-control mb-2"
+             type="text"
+             placeholder="Job Title"
+             [(ngModel)]="jobTitle">
 
-  <hr>
+      <textarea class="form-control mb-2"
+                rows="5"
+                placeholder="Paste Job Description"
+                [(ngModel)]="jobText"></textarea>
 
-  <div *ngFor="let category of result.category_match | keyvalue">
-    <h4>{{ category.key }}</h4>
+      <button class="btn btn-success"
+              (click)="uploadJob()">
+        Upload Job
+      </button>
 
-    <p><strong>Matched:</strong>
-      {{ category.value.matched.join(', ') }}
-    </p>
+    </div>
+  </div>
 
-    <p><strong>Missing:</strong>
-      {{ category.value.missing.join(', ') }}
-    </p>
+  <!-- Compare Section -->
+  <div class="card mb-4">
+    <div class="card-body">
 
-    <p><strong>Category Match:</strong>
-      {{ category.value.percentage }}%
-    </p>
+      <h4>Compare Resume with Job</h4>
 
-    <hr>
+      <div class="row">
+        <div class="col-md-5">
+          <select class="form-select"
+                  [(ngModel)]="selectedResumeId">
+            <option value="">Select Resume</option>
+            <option *ngFor="let r of resumes" [value]="r.id">
+              {{ r.title }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-5">
+          <select class="form-select"
+                  [(ngModel)]="selectedJobId">
+            <option value="">Select Job</option>
+            <option *ngFor="let j of jobs" [value]="j.id">
+              {{ j.title }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-2">
+          <button class="btn btn-dark w-100"
+                  (click)="compare()">
+            Compare
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Result Section -->
+  <div *ngIf="result" class="card">
+    <div class="card-body">
+
+      <h3>Overall Match</h3>
+
+      <div class="progress mb-3" style="height: 25px;">
+        <div class="progress-bar"
+             role="progressbar"
+             [style.width.%]="result.overall_match_percentage">
+          {{ result.overall_match_percentage }}%
+        </div>
+      </div>
+
+      <h4>Recommended Skills</h4>
+      <ul>
+        <li *ngFor="let rec of result.recommendations">
+          {{ rec.skill }} ({{ rec.category }})
+        </li>
+      </ul>
+
+      <hr>
+
+      <div *ngFor="let category of result.category_match | keyvalue">
+        <h5 class="text-capitalize">
+          {{ category.key.replace('_', ' ') }}
+        </h5>
+
+        <div class="progress mb-2">
+          <div class="progress-bar bg-info"
+               [style.width.%]="category.value.percentage">
+            {{ category.value.percentage }}%
+          </div>
+        </div>
+
+        <p><strong>Matched:</strong>
+          {{ category.value.matched.join(', ') }}
+        </p>
+
+        <p><strong>Missing:</strong>
+          {{ category.value.missing.join(', ') }}
+        </p>
+
+        <hr>
+      </div>
+
+    </div>
   </div>
 
 </div>

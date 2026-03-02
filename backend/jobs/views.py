@@ -34,9 +34,18 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from .models import JobDescription
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def job_list_api(request):
-    jobs = JobDescription.objects.filter(user=request.user)
-    serializer = JobSerializer(jobs, many=True)
-    return Response(serializer.data)
+
+    if request.method == 'GET':
+        jobs = JobDescription.objects.filter(user=request.user)
+        serializer = JobSerializer(jobs, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = JobSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)

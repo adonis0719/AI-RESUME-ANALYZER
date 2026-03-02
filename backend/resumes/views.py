@@ -53,12 +53,21 @@ from .serializers import ResumeSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def resume_list_api(request):
-    resumes = Resume.objects.filter(user=request.user)
-    serializer = ResumeSerializer(resumes, many=True)
-    return Response(serializer.data)
+
+    if request.method == 'GET':
+        resumes = Resume.objects.filter(user=request.user)
+        serializer = ResumeSerializer(resumes, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = ResumeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
 
 
 

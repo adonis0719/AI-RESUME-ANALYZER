@@ -16,6 +16,12 @@ export class DashboardComponent implements OnInit {
 
   result?: CompareResult;
 
+  selectedFile?: File;
+  resumeTitle = '';
+
+  jobTitle = '';
+  jobText = '';
+
   private apiUrl = 'http://127.0.0.1:8000/api';
 
   constructor(
@@ -39,6 +45,40 @@ export class DashboardComponent implements OnInit {
     this.http.get<any[]>(`${this.apiUrl}/jobs/`)
       .subscribe(res => {
         this.jobs = res;
+      });
+  }
+
+  // 👇 ADD THESE BELOW loadJobs()
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+  
+  uploadResume() {
+    if (!this.selectedFile || !this.resumeTitle) return;
+  
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
+    formData.append('title', this.resumeTitle);
+  
+    this.http.post(`${this.apiUrl}/resumes/`, formData)
+      .subscribe(() => {
+        this.loadResumes(); // refresh list
+        this.resumeTitle = '';
+      });
+  }
+  
+  uploadJob() {
+    const data = {
+      title: this.jobTitle,
+      description: this.jobText
+    };
+  
+    this.http.post(`${this.apiUrl}/jobs/`, data)
+      .subscribe(() => {
+        this.loadJobs(); // refresh list
+        this.jobTitle = '';
+        this.jobText = '';
       });
   }
 
