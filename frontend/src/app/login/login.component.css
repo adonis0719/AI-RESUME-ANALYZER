@@ -1,0 +1,148 @@
+/* ===== FULL PAGE WRAPPER ===== */
+
+.login-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #4f46e5, #6366f1, #7c3aed);
+  position: relative;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ===== BACKGROUND GLOW EFFECTS ===== */
+
+.bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.5;
+  animation: float 8s ease-in-out infinite;
+}
+
+.bg-circle-1 {
+  width: 400px;
+  height: 400px;
+  background: #22d3ee;
+  top: -100px;
+  left: -100px;
+}
+
+.bg-circle-2 {
+  width: 350px;
+  height: 350px;
+  background: #f472b6;
+  bottom: -100px;
+  right: -100px;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(20px); }
+  100% { transform: translateY(0px); }
+}
+
+/* ===== LOGIN CARD ===== */
+
+.login-card {
+  width: 420px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  color: white;
+  z-index: 2;
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== BRAND SECTION ===== */
+
+.brand-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.brand-title {
+  font-weight: 700;
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.brand-subtitle {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+/* ===== FORM SECTION ===== */
+
+.login-title {
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+/* ===== INPUTS ===== */
+
+.modern-input {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 12px;
+  padding: 12px 15px;
+  color: white;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.modern-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.modern-input:focus {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+  color: white;
+}
+
+/* ===== BUTTON ===== */
+
+.login-btn {
+  background: white;
+  color: #4f46e5;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* ===== SIGNUP TEXT ===== */
+
+.signup-text {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.signup-text a {
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: underline;
+}
