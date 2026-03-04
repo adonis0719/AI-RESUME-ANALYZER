@@ -9,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DashboardComponent implements OnInit {
 
+  loading = false;
+
   resumes: any[] = [];
   jobs: any[] = [];
 
@@ -84,15 +86,51 @@ export class DashboardComponent implements OnInit {
         this.jobText = '';
       });
   }
-
+  
   compare() {
-    if (!this.selectedResumeId || !this.selectedJobId) return;
 
-    this.compareService.compare(this.selectedResumeId, this.selectedJobId)
-      .subscribe(res => {
-        this.result = res;
+    if (!this.selectedResumeId || !this.selectedJobId) {
+      alert("Please select both resume and job.");
+      return;
+    }
+
+    this.loading = true;
+
+    this.compareService
+      .compare(this.selectedResumeId, this.selectedJobId)
+      .subscribe({
+        next: (res) => {
+          this.result = res;
+          this.loading = false;
+        },
+        error: (err) => {
+          console.log(err);
+          this.loading = false;
+        }
+      });
+
+  }
+
+  deleteResume(id: number) {
+
+
+    if (!confirm("Delete this resume?")) return;
+
+    this.http.delete(`${this.apiUrl}/resumes/${id}/`)
+      .subscribe(() => {
+        this.loadResumes();
       });
   }
+
+  deleteJob(id: number) {
+
+    if (!confirm("Delete this job description?")) return;
+
+    this.http.delete(`${this.apiUrl}/jobs/${id}/`)
+      .subscribe(() => {
+        this.loadJobs();
+      });
+  }  
 
   toggleTheme() {
     this.currentTheme =

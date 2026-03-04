@@ -58,6 +58,42 @@
       </div>
     </div>
 
+    <!-- SAVED RESUMES -->
+    <div class="card-section">
+
+      <h5 class="mt-3">Your Resumes</h5>
+
+      <ul class="list-group mb-4">
+        <li class="list-group-item d-flex justify-content-between"
+            *ngFor="let r of resumes">
+
+            {{ r.title }}
+
+            <button class="btn btn-danger btn-sm"
+                    (click)="deleteResume(r.id)">
+                Delete
+            </button>
+        </li>
+      </ul>
+
+
+      <h5 class="mt-3">Your Job Descriptions</h5>
+
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between"
+            *ngFor="let j of jobs">
+
+            {{ j.title }}
+
+            <button class="btn btn-danger btn-sm"
+                    (click)="deleteJob(j.id)">
+                Delete
+            </button>
+        </li>
+      </ul>
+
+    </div>
+
     <!-- COMPARE SECTION -->
     <div class="card-section">
       <h5 class="section-title mb-4">Compare</h5>
@@ -86,9 +122,17 @@
         </div>
 
         <div class="col-md-2 d-grid">
-          <button class="btn btn-dark"
-                  (click)="compare()">
-            Compare
+          <button class="btn btn-dark w-100"
+                  (click)="compare()"
+                  [disabled]="loading">
+
+            <span *ngIf="!loading">Compare</span>
+
+            <span *ngIf="loading">
+              <span class="spinner-border spinner-border-sm"></span>
+              Analyzing...
+            </span>
+
           </button>
         </div>
       </div>

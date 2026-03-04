@@ -53,6 +53,8 @@ from .serializers import ResumeSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 
+from rest_framework import status
+
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def resume_list_api(request):
@@ -68,6 +70,19 @@ def resume_list_api(request):
             serializer.save(user=request.user)
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
+    
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_resume_api(request, resume_id):
+
+    try:
+        resume = Resume.objects.get(id=resume_id, user=request.user)
+        resume.delete()
+        return Response({"message": "Resume deleted"}, status=status.HTTP_200_OK)
+
+    except Resume.DoesNotExist:
+        return Response({"error": "Resume not found"}, status=status.HTTP_404_NOT_FOUND)    
 
 
 
