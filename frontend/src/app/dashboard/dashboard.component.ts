@@ -111,6 +111,17 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  viewResume(filePath: string) {
+    
+    const url = "http://127.0.0.1:8000" + filePath;
+
+    window.open(url, "_blank");
+
+  }
+
+
+  
+
   deleteResume(id: number) {
 
 

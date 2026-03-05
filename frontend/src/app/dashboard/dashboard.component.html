@@ -68,6 +68,12 @@
             *ngFor="let r of resumes">
 
             {{ r.title }}
+            
+            <button class="btn btn-primary btn-sm me-2"
+                    (click)="viewResume(r.file)">
+                View
+            </button>
+
 
             <button class="btn btn-danger btn-sm"
                     (click)="deleteResume(r.id)">
