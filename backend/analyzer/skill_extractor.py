@@ -1,165 +1,174 @@
 import spacy
 import re
 from spacy.matcher import PhraseMatcher
+import json
+import os
 
 nlp = spacy.load("en_core_web_sm")
 
-SKILLS_DB = {
 
-# ================= PROGRAMMING =================
-"programming_languages": [
-    "python","java","c","c++","c#","javascript","typescript",
-    "go","golang","rust","kotlin","swift","php","ruby","scala",
-    "r","matlab","bash","shell scripting","powershell",
-    "groovy","dart","objective-c","haskell","perl",
-    "assembly","vba","solidity","fortran","cobol"
-],
+BASE_DIR = os.path.dirname(__file__)
+skills_file = os.path.join(BASE_DIR, "skills.json")
 
-# ================= FRONTEND =================
-"frontend": [
-    "html","html5","css","css3","sass","scss",
-    "bootstrap","tailwind","material ui","mui",
-    "react","react.js","next.js","angular","vue",
-    "nuxt","svelte","redux","zustand","context api",
-    "jquery","webpack","vite","babel",
-    "responsive design","ui/ux","figma","adobe xd"
-],
+with open(skills_file, "r") as f:
+    SKILLS_DB = json.load(f)
 
-# ================= BACKEND =================
-"backend": [
-    "node.js","nodejs","express","nestjs",
-    "django","flask","fastapi",
-    "spring","spring boot","hibernate",
-    "laravel","codeigniter",
-    "asp.net",".net core","entity framework",
-    "graphql","rest api","soap","microservices",
-    "jwt","oauth","authentication","authorization"
-],
+# SKILLS_DB = {
 
-# ================= DATABASES =================
-"databases": [
-    "mysql","postgresql","sql server","t-sql",
-    "mongodb","redis","oracle","sqlite",
-    "cassandra","dynamodb","firebase",
-    "mariadb","elasticsearch","neo4j",
-    "snowflake","bigquery"
-],
+# # ================= PROGRAMMING =================
+# "programming_languages": [
+#     "python","java","c","c++","c#","javascript","typescript",
+#     "go","golang","rust","kotlin","swift","php","ruby","scala",
+#     "r","matlab","bash","shell scripting","powershell",
+#     "groovy","dart","objective-c","haskell","perl",
+#     "assembly","vba","solidity","fortran","cobol"
+# ],
 
-# ================= CLOUD =================
-"cloud": [
-    "aws","amazon web services","ec2","s3","lambda",
-    "azure","microsoft azure","azure devops",
-    "gcp","google cloud","google cloud platform",
-    "heroku","digitalocean","cloudflare",
-    "cloud computing","serverless"
-],
+# # ================= FRONTEND =================
+# "frontend": [
+#     "html","html5","css","css3","sass","scss",
+#     "bootstrap","tailwind","material ui","mui",
+#     "react","react.js","next.js","angular","vue",
+#     "nuxt","svelte","redux","zustand","context api",
+#     "jquery","webpack","vite","babel",
+#     "responsive design","ui/ux","figma","adobe xd"
+# ],
 
-# ================= DEVOPS =================
-"devops": [
-    "docker","kubernetes","jenkins",
-    "terraform","ansible","chef","puppet",
-    "ci/cd","github actions","gitlab ci",
-    "travis ci","bitbucket pipelines",
-    "prometheus","grafana",
-    "nginx","apache","linux administration",
-    "shell scripting"
-],
+# # ================= BACKEND =================
+# "backend": [
+#     "node.js","nodejs","express","nestjs",
+#     "django","flask","fastapi",
+#     "spring","spring boot","hibernate",
+#     "laravel","codeigniter",
+#     "asp.net",".net core","entity framework",
+#     "graphql","rest api","soap","microservices",
+#     "jwt","oauth","authentication","authorization"
+# ],
 
-# ================= DATA SCIENCE / AI =================
-"data_science_ai": [
-    "machine learning","deep learning",
-    "artificial intelligence","ai",
-    "nlp","computer vision",
-    "pandas","numpy","scipy",
-    "matplotlib","seaborn",
-    "tensorflow","keras","pytorch",
-    "scikit-learn","xgboost",
-    "opencv","langchain","llm",
-    "data analysis","data mining",
-    "feature engineering","model deployment",
-    "statistics","probability"
-],
+# # ================= DATABASES =================
+# "databases": [
+#     "mysql","postgresql","sql server","t-sql",
+#     "mongodb","redis","oracle","sqlite",
+#     "cassandra","dynamodb","firebase",
+#     "mariadb","elasticsearch","neo4j",
+#     "snowflake","bigquery"
+# ],
 
-# ================= DATA ANALYTICS / BI =================
-"data_analytics_bi": [
-    "power bi","tableau","looker",
-    "excel","advanced excel","pivot tables",
-    "vlookup","xlookup","power query",
-    "power pivot","data visualization",
-    "dashboard creation","business intelligence",
-    "reporting","etl","data warehousing"
-],
+# # ================= CLOUD =================
+# "cloud": [
+#     "aws","amazon web services","ec2","s3","lambda",
+#     "azure","microsoft azure","azure devops",
+#     "gcp","google cloud","google cloud platform",
+#     "heroku","digitalocean","cloudflare",
+#     "cloud computing","serverless"
+# ],
 
-# ================= ERP / CRM =================
-"erp_crm": [
-    "sap","sap hana","sap fico",
-    "oracle erp","netsuite",
-    "salesforce","crm","hubspot",
-    "zoho crm","dynamics 365"
-],
+# # ================= DEVOPS =================
+# "devops": [
+#     "docker","kubernetes","jenkins",
+#     "terraform","ansible","chef","puppet",
+#     "ci/cd","github actions","gitlab ci",
+#     "travis ci","bitbucket pipelines",
+#     "prometheus","grafana",
+#     "nginx","apache","linux administration",
+#     "shell scripting"
+# ],
 
-# ================= ACCOUNTING / FINANCE =================
-"accounting_finance": [
-    "tally","quickbooks","bookkeeping",
-    "accounts payable","accounts receivable",
-    "gst","taxation","financial reporting",
-    "balance sheet","profit and loss",
-    "bank reconciliation","payroll"
-],
+# # ================= DATA SCIENCE / AI =================
+# "data_science_ai": [
+#     "machine learning","deep learning",
+#     "artificial intelligence","ai",
+#     "nlp","computer vision",
+#     "pandas","numpy","scipy",
+#     "matplotlib","seaborn",
+#     "tensorflow","keras","pytorch",
+#     "scikit-learn","xgboost",
+#     "opencv","langchain","llm",
+#     "data analysis","data mining",
+#     "feature engineering","model deployment",
+#     "statistics","probability"
+# ],
 
-# ================= MOBILE =================
-"mobile": [
-    "android","android studio",
-    "kotlin","java android",
-    "ios","swift","swiftui",
-    "react native","flutter","dart",
-    "xamarin","ionic"
-],
+# # ================= DATA ANALYTICS / BI =================
+# "data_analytics_bi": [
+#     "power bi","tableau","looker",
+#     "excel","advanced excel","pivot tables",
+#     "vlookup","xlookup","power query",
+#     "power pivot","data visualization",
+#     "dashboard creation","business intelligence",
+#     "reporting","etl","data warehousing"
+# ],
 
-# ================= TESTING =================
-"testing": [
-    "unit testing","integration testing",
-    "pytest","junit","selenium",
-    "cypress","jest","mocha",
-    "postman","manual testing",
-    "automation testing","testng"
-],
+# # ================= ERP / CRM =================
+# "erp_crm": [
+#     "sap","sap hana","sap fico",
+#     "oracle erp","netsuite",
+#     "salesforce","crm","hubspot",
+#     "zoho crm","dynamics 365"
+# ],
 
-# ================= VERSION CONTROL =================
-"version_control": [
-    "git","github","gitlab","bitbucket","svn"
-],
+# # ================= ACCOUNTING / FINANCE =================
+# "accounting_finance": [
+#     "tally","quickbooks","bookkeeping",
+#     "accounts payable","accounts receivable",
+#     "gst","taxation","financial reporting",
+#     "balance sheet","profit and loss",
+#     "bank reconciliation","payroll"
+# ],
 
-# ================= SECURITY =================
-"security": [
-    "cybersecurity","penetration testing",
-    "ethical hacking","owasp",
-    "jwt","oauth","encryption",
-    "network security","firewall",
-    "vulnerability assessment"
-],
+# # ================= MOBILE =================
+# "mobile": [
+#     "android","android studio",
+#     "kotlin","java android",
+#     "ios","swift","swiftui",
+#     "react native","flutter","dart",
+#     "xamarin","ionic"
+# ],
 
-# ================= SOFTWARE CONCEPTS =================
-"software_concepts": [
-    "oop","object oriented programming",
-    "data structures","algorithms",
-    "design patterns","system design",
-    "agile","scrum","kanban",
-    "solid principles",
-    "mvc architecture",
-    "clean architecture",
-    "restful services"
-],
+# # ================= TESTING =================
+# "testing": [
+#     "unit testing","integration testing",
+#     "pytest","junit","selenium",
+#     "cypress","jest","mocha",
+#     "postman","manual testing",
+#     "automation testing","testng"
+# ],
 
-# ================= SOFT SKILLS =================
-"soft_skills": [
-    "communication","teamwork","leadership",
-    "problem solving","critical thinking",
-    "time management","adaptability",
-    "analytical skills","decision making",
-    "project management"
-]
-}
+# # ================= VERSION CONTROL =================
+# "version_control": [
+#     "git","github","gitlab","bitbucket","svn"
+# ],
+
+# # ================= SECURITY =================
+# "security": [
+#     "cybersecurity","penetration testing",
+#     "ethical hacking","owasp",
+#     "jwt","oauth","encryption",
+#     "network security","firewall",
+#     "vulnerability assessment"
+# ],
+
+# # ================= SOFTWARE CONCEPTS =================
+# "software_concepts": [
+#     "oop","object oriented programming",
+#     "data structures","algorithms",
+#     "design patterns","system design",
+#     "agile","scrum","kanban",
+#     "solid principles",
+#     "mvc architecture",
+#     "clean architecture",
+#     "restful services"
+# ],
+
+# # ================= SOFT SKILLS =================
+# "soft_skills": [
+#     "communication","teamwork","leadership",
+#     "problem solving","critical thinking",
+#     "time management","adaptability",
+#     "analytical skills","decision making",
+#     "project management"
+# ]
+# }
 
 import re
 

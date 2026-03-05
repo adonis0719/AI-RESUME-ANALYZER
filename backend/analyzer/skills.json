@@ -1,0 +1,496 @@
+{
+    "programming_languages": [
+        "python","java","c","c++","c#","javascript","typescript",
+        "go","golang","rust","kotlin","swift","php","ruby","scala",
+        "r","matlab","bash","shell scripting","powershell",
+        "groovy","dart","objective-c","haskell","perl",
+        "assembly","vba","solidity","fortran","cobol"
+    ],
+
+
+    "frontend": [
+        "html","html5","css","css3","sass","scss",
+        "bootstrap","tailwind","material ui","mui",
+        "react","react.js","next.js","angular","vue",
+        "nuxt","svelte","redux","zustand","context api",
+        "jquery","webpack","vite","babel",
+        "responsive design","ui/ux","figma","adobe xd"
+    ],
+
+
+    "backend": [
+        "node.js","nodejs","express","nestjs",
+        "django","flask","fastapi",
+        "spring","spring boot","hibernate",
+        "laravel","codeigniter",
+        "asp.net",".net core","entity framework",
+        "graphql","rest api","soap","microservices",
+        "jwt","oauth","authentication","authorization"
+    ],
+
+
+    "databases": [
+        "mysql","postgresql","sql server","t-sql",
+        "mongodb","redis","oracle","sqlite",
+        "cassandra","dynamodb","firebase",
+        "mariadb","elasticsearch","neo4j",
+        "snowflake","bigquery"
+    ],
+
+
+    "cloud": [
+        "aws","amazon web services","ec2","s3","lambda",
+        "azure","microsoft azure","azure devops",
+        "gcp","google cloud","google cloud platform",
+        "heroku","digitalocean","cloudflare",
+        "cloud computing","serverless"
+    ],
+
+
+    "devops": [
+        "docker","kubernetes","jenkins",
+        "terraform","ansible","chef","puppet",
+        "ci/cd","github actions","gitlab ci",
+        "travis ci","bitbucket pipelines",
+        "prometheus","grafana",
+        "nginx","apache","linux administration",
+        "shell scripting"
+    ],
+
+
+    "data_science_ai": [
+        "machine learning","deep learning",
+        "artificial intelligence","ai",
+        "nlp","computer vision",
+        "pandas","numpy","scipy",
+        "matplotlib","seaborn",
+        "tensorflow","keras","pytorch",
+        "scikit-learn","xgboost",
+        "opencv","langchain","llm",
+        "data analysis","data mining",
+        "feature engineering","model deployment",
+        "statistics","probability"
+    ],
+
+
+    "data_analytics_bi": [
+        "power bi","tableau","looker",
+        "excel","advanced excel","pivot tables",
+        "vlookup","xlookup","power query",
+        "power pivot","data visualization",
+        "dashboard creation","business intelligence",
+        "reporting","etl","data warehousing"
+    ],
+
+
+    "erp_crm": [
+        "sap","sap hana","sap fico",
+        "oracle erp","netsuite",
+        "salesforce","crm","hubspot",
+        "zoho crm","dynamics 365"
+    ],
+
+
+    "accounting_finance": [
+        "tally","quickbooks","bookkeeping",
+        "accounts payable","accounts receivable",
+        "gst","taxation","financial reporting",
+        "balance sheet","profit and loss",
+        "bank reconciliation","payroll"
+    ],
+
+
+    "mobile": [
+        "android","android studio",
+        "kotlin","java android",
+        "ios","swift","swiftui",
+        "react native","flutter","dart",
+        "xamarin","ionic"
+    ],
+
+
+    "testing": [
+        "unit testing","integration testing",
+        "pytest","junit","selenium",
+        "cypress","jest","mocha",
+        "postman","manual testing",
+        "automation testing","testng"
+    ],
+
+
+    "version_control": [
+        "git","github","gitlab","bitbucket","svn"
+    ],
+
+
+    "security": [
+        "cybersecurity","penetration testing",
+        "ethical hacking","owasp",
+        "jwt","oauth","encryption",
+        "network security","firewall",
+        "vulnerability assessment"
+    ],
+
+
+    "software_concepts": [
+        "oop","object oriented programming",
+        "data structures","algorithms",
+        "design patterns","system design",
+        "agile","scrum","kanban",
+        "solid principles",
+        "mvc architecture",
+        "clean architecture",
+        "restful services"
+    ],
+
+    "soft_skills": [
+        "communication","teamwork","leadership",
+        "problem solving","critical thinking",
+        "time management","adaptability",
+        "analytical skills","decision making",
+        "project management"
+    ],
+
+
+    "healthcare": [
+    "patient care","clinical diagnosis","nursing","surgery","anatomy","pharmacology",
+    "radiology","medical imaging","ultrasound","x-ray","mri","ct scan",
+    "epidemiology","public health","biostatistics","clinical research",
+    "medical coding","medical billing","electronic health records","ehr",
+    "telemedicine","infection control","emergency medicine","critical care",
+    "laboratory testing","blood analysis","pathology","microbiology"
+    ],
+
+    "engineering": [
+    "mechanical engineering","electrical engineering","civil engineering",
+    "structural engineering","chemical engineering","aerospace engineering",
+    "automotive engineering","robotics","mechatronics","thermodynamics",
+    "fluid mechanics","cad","autocad","solidworks","catia","ansys",
+    "finite element analysis","control systems","embedded systems",
+    "industrial engineering","manufacturing engineering","quality control"
+    ],
+
+    "construction": [
+    "carpentry","masonry","plumbing","welding","steel fixing",
+    "scaffolding","concrete work","site supervision","construction management",
+    "blueprint reading","roofing","tile installation","drywall installation",
+    "excavation","heavy equipment operation","safety compliance"
+    ],
+
+    "manufacturing": [
+    "production planning","assembly line operations","lean manufacturing",
+    "six sigma","quality assurance","quality control","process optimization",
+    "industrial automation","cnc machining","lathe operation","milling",
+    "robotic welding","supply chain coordination","inventory control"
+    ],
+
+    "logistics_supply_chain": [
+    "logistics management","supply chain management","inventory management",
+    "warehouse operations","shipping","freight forwarding","procurement",
+    "demand forecasting","distribution management","transportation planning",
+    "cold chain logistics","customs clearance","fleet management"
+    ],
+
+    "hospitality": [
+    "hotel management","front desk operations","guest relations",
+    "housekeeping management","food and beverage service",
+    "restaurant management","banquet management","event planning",
+    "reservation systems","hospitality marketing","tourism management"
+    ],
+
+    "education": [
+    "teaching","curriculum development","lesson planning","classroom management",
+    "student assessment","e-learning","instructional design","educational technology",
+    "special education","academic advising","research supervision"
+    ],
+
+    "law": [
+    "legal research","legal drafting","litigation","contract law",
+    "corporate law","intellectual property law","criminal law",
+    "civil law","legal compliance","arbitration","mediation",
+    "case analysis","legal documentation"
+    ],
+
+    "marketing": [
+    "digital marketing","seo","search engine optimization",
+    "sem","google ads","content marketing","copywriting",
+    "email marketing","social media marketing","brand management",
+    "market research","customer segmentation","growth marketing"
+    ],
+
+    "sales": [
+    "lead generation","prospecting","sales negotiation",
+    "closing deals","crm management","sales forecasting",
+    "account management","customer relationship management",
+    "business development","inside sales","outside sales"
+    ],
+
+    "human_resources": [
+    "recruitment","talent acquisition","employee relations",
+    "performance management","payroll management","hr compliance",
+    "onboarding","training and development","hr analytics",
+    "compensation and benefits","workforce planning"
+    ],
+
+    "finance": [
+    "financial analysis","investment analysis","risk management",
+    "portfolio management","corporate finance","financial modeling",
+    "budgeting","forecasting","auditing","cost accounting",
+    "tax planning","financial compliance"
+    ],
+
+    "creative_design": [
+    "graphic design","illustration","branding","logo design",
+    "typography","motion graphics","video editing","photography",
+    "storyboarding","3d modeling","animation","ui design","ux design"
+    ],
+
+    "media_journalism": [
+    "news reporting","investigative journalism","editing",
+    "broadcast journalism","content writing","script writing",
+    "podcasting","media production","fact checking"
+    ],
+
+    "agriculture": [
+    "crop management","soil science","irrigation management",
+    "pest control","fertilizer management","greenhouse farming",
+    "livestock management","dairy farming","agronomy",
+    "agricultural machinery operation"
+    ],
+
+    "aviation": [
+    "flight navigation","aircraft maintenance","avionics",
+    "air traffic control","flight operations","aviation safety",
+    "aircraft inspection","aerodynamics"
+    ],
+
+    "maritime": [
+    "navigation","marine engineering","ship maintenance",
+    "cargo handling","port operations","marine safety",
+    "vessel operations"
+    ],
+
+    "sports": [
+    "athletic training","sports coaching","fitness training",
+    "strength conditioning","sports analytics","team management"
+    ],
+
+    "science_research": [
+    "scientific research","experimental design","data analysis",
+    "laboratory techniques","biochemistry","molecular biology",
+    "genetics","environmental science","physics research"
+    ],
+    "retail": [
+    "retail sales",
+    "store management",
+    "visual merchandising",
+    "inventory stocking",
+    "point of sale systems",
+    "cash handling",
+    "customer assistance",
+    "retail operations",
+    "product display",
+    "sales promotion",
+    "loss prevention",
+    "store layout planning"
+    ],
+
+    "customer_service": [
+    "customer support",
+    "call center operations",
+    "customer complaint resolution",
+    "customer relationship building",
+    "ticketing systems",
+    "live chat support",
+    "technical support",
+    "help desk support",
+    "customer satisfaction management",
+    "service recovery",
+    "customer onboarding"
+    ],
+
+    "procurement": [
+    "vendor management",
+    "supplier negotiation",
+    "contract negotiation",
+    "purchase order management",
+    "sourcing strategy",
+    "supplier evaluation",
+    "procurement planning",
+    "strategic sourcing",
+    "supplier relationship management"
+    ],
+
+    "real_estate": [
+    "property management",
+    "real estate sales",
+    "property valuation",
+    "real estate marketing",
+    "tenant management",
+    "property leasing",
+    "real estate negotiation",
+    "mortgage advisory",
+    "property investment analysis"
+    ],
+
+    "insurance": [
+    "insurance underwriting",
+    "claims processing",
+    "risk assessment",
+    "policy administration",
+    "insurance sales",
+    "claims investigation",
+    "insurance compliance",
+    "actuarial analysis"
+    ],
+
+    "banking": [
+    "retail banking",
+    "corporate banking",
+    "loan processing",
+    "credit analysis",
+    "financial risk assessment",
+    "bank operations",
+    "mortgage processing",
+    "wealth management",
+    "investment advisory"
+    ],
+
+    "public_administration": [
+    "government policy analysis",
+    "public sector management",
+    "regulatory compliance",
+    "public budgeting",
+    "policy development",
+    "public program management",
+    "legislative research",
+    "government relations"
+    ],
+
+    "environmental": [
+    "environmental impact assessment",
+    "sustainability management",
+    "waste management",
+    "climate change analysis",
+    "environmental monitoring",
+    "renewable energy management",
+    "carbon footprint analysis"
+    ],
+
+    "energy": [
+    "renewable energy systems",
+    "solar power installation",
+    "wind energy systems",
+    "energy auditing",
+    "power generation",
+    "power distribution",
+    "energy efficiency analysis",
+    "electrical grid management"
+    ],
+
+    "transportation": [
+    "route planning",
+    "fleet operations",
+    "transport coordination",
+    "logistics scheduling",
+    "vehicle maintenance planning",
+    "public transport operations",
+    "traffic management"
+    ],
+
+    "food_industry": [
+    "food preparation",
+    "food safety standards",
+    "menu planning",
+    "culinary arts",
+    "food quality control",
+    "restaurant kitchen management",
+    "food hygiene compliance",
+    "catering services"
+    ],
+
+    "pharmaceutical": [
+    "drug formulation",
+    "pharmaceutical manufacturing",
+    "clinical trials",
+    "drug safety monitoring",
+    "pharmacovigilance",
+    "regulatory submissions",
+    "good manufacturing practices"
+    ],
+
+    "biotechnology": [
+    "gene sequencing",
+    "cell culture techniques",
+    "dna analysis",
+    "protein purification",
+    "bioprocess engineering",
+    "genetic engineering",
+    "biotech research"
+    ],
+
+    "architecture": [
+    "architectural design",
+    "building information modeling",
+    "urban planning",
+    "landscape architecture",
+    "construction documentation",
+    "sustainable architecture"
+    ],
+
+    "animation_vfx": [
+    "visual effects",
+    "character animation",
+    "3d rendering",
+    "rigging",
+    "storyboarding for animation",
+    "motion capture",
+    "vfx compositing"
+    ],
+
+    "gaming": [
+    "game design",
+    "level design",
+    "game physics",
+    "game programming",
+    "unity development",
+    "unreal engine",
+    "game testing"
+    ],
+
+    "printing_publishing": [
+    "editorial management",
+    "typesetting",
+    "book publishing",
+    "print production",
+    "layout design",
+    "proofreading"
+    ],
+
+    "psychology": [
+    "psychological assessment",
+    "counseling",
+    "behavioral therapy",
+    "mental health support",
+    "psychometric testing",
+    "cognitive behavioral therapy"
+    ],
+
+    "translation_languages": [
+    "translation",
+    "interpretation",
+    "localization",
+    "technical translation",
+    "simultaneous interpretation",
+    "language proofreading"
+    ],
+
+    "security_services": [
+    "physical security",
+    "surveillance monitoring",
+    "access control systems",
+    "security risk assessment",
+    "incident response",
+    "security patrol"
+    ]
+}    
