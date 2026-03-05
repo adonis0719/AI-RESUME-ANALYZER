@@ -16,6 +16,10 @@
       </button>
     </div>
 
+    <button routerLink="/recruiter" class="btn btn-primary">
+    Recruiter Resume Analyzer
+    </button>
+
     <!-- UPLOAD SECTION -->
     <div class="card-section">
       <div class="row g-5">
@@ -68,7 +72,7 @@
             *ngFor="let r of resumes">
 
             {{ r.title }}
-            
+
             <button class="btn btn-primary btn-sm me-2"
                     (click)="viewResume(r.file)">
                 View

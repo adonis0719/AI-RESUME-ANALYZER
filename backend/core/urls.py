@@ -17,6 +17,8 @@ from matching.views import compare_api
 from resumes.views import delete_resume_api
 from jobs.views import delete_job_api
 
+from recruiter.views import bulk_analyze
+
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -40,6 +42,7 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/register/', register_api),
+    path('api/recruiter/analyze/', bulk_analyze),
 ]
     
 
