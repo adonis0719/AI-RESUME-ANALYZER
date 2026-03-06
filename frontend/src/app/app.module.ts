@@ -14,6 +14,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegisterComponent } from './register/register.component';
 import { RecruiterComponent } from './recruiter/recruiter.component';
+import { RecruiterDetailsComponent } from './recruiter-details/recruiter-details.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { RecruiterComponent } from './recruiter/recruiter.component';
     LoginComponent,
     DashboardComponent,
     RegisterComponent,
-    RecruiterComponent
+    RecruiterComponent,
+    RecruiterDetailsComponent
   ],
   imports: [
     BrowserModule,

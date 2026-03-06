@@ -44,7 +44,8 @@ def bulk_analyze(request):
         results.append({
             "name": file.name,
             "score": score,
-            "file_url": f"/media/temp_recruiter/{file.name}"
+            "file_url": f"/media/temp_recruiter/{file.name}",
+            "details": match
         })
 
     results = sorted(results, key=lambda x: x["score"], reverse=True)

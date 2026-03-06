@@ -1,0 +1,22 @@
+<div class="container mt-4" *ngIf="resume">
+
+<h2>{{resume.name}}</h2>
+
+<h4>Score: {{resume.score}} %</h4>
+
+<hr>
+
+<h3>Skill Analysis</h3>
+
+<div *ngFor="let c of resume.details.category_match | keyvalue">
+
+<h5>{{c.key}}</h5>
+
+<p><b>Matched Skills:</b> {{ getMatched(c.value).join(', ') }}</p>
+<p><b>Missing Skills:</b> {{ getMissing(c.value).join(', ') }}</p>
+
+<hr>
+
+</div>
+
+</div>

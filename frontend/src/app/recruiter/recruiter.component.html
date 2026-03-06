@@ -18,6 +18,22 @@
 
 <h3 *ngIf="results.length">Ranked Resumes</h3>
 
+<button class="btn btn-success mb-3"
+(click)="downloadReport()"
+*ngIf="results.length">
+
+Download Report
+
+</button>
+
+<button class="btn btn-warning mb-3"
+(click)="clearResults()"
+*ngIf="results.length">
+
+Clear Results
+
+</button>
+
 <table class="table table-bordered" *ngIf="results.length">
 
 <thead>
@@ -25,6 +41,7 @@
 <th>Rank</th>
 <th>Resume</th>
 <th>Score</th>
+<th>Details</th>
 </tr>
 </thead>
 
@@ -41,9 +58,31 @@
 
 <td>{{ r.score }} %</td>
 
+<td>
+<button class="btn btn-info btn-sm"
+(click)="openDetails(r)">
+More Details
+</button>
+</td>
+
 </tr>
 </tbody>
 
 </table>
+
+<div *ngIf="selectedDetails" class="mt-4">
+
+<h4>Matched / Missing Skills</h4>
+
+<div *ngFor="let c of selectedDetails.category_match | keyvalue">
+
+<h5>{{c.key}}</h5>
+
+<p><b>Matched:</b> {{ getMatched(c.value).join(', ') }}</p>
+<p><b>Missing:</b> {{ getMissing(c.value).join(', ') }}</p>
+
+</div>
+
+</div>
 
 </div>
