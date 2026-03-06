@@ -59,3 +59,67 @@ def register_api(request):
         {"message": "User created successfully"},
         status=status.HTTP_201_CREATED
     )    
+
+
+
+from django.core.mail import send_mail
+from django.conf import settings
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import EmailOTP
+from .utils import generate_otp
+
+
+
+@api_view(['POST'])
+def send_otp(request):
+
+    email = request.data.get("email")
+
+    if not email:
+        return Response({"error": "Email is required"}, status=400)
+
+    otp = generate_otp()
+
+    EmailOTP.objects.create(
+        email=email,
+        otp=otp
+    )
+
+    send_mail(
+        "Email Verification OTP",
+        f"Your OTP is {otp}",
+        settings.EMAIL_HOST_USER,
+        [email]
+    )
+
+    return Response({"message": "OTP sent successfully"})
+
+
+
+
+
+
+from django.contrib.auth.models import User
+
+@api_view(['POST'])
+def verify_otp(request):
+
+    email = request.data.get("email")
+    otp = request.data.get("otp")
+    password = request.data.get("password")
+
+    record = EmailOTP.objects.filter(email=email, otp=otp).order_by('-created_at').first()
+
+    if not record:
+        return Response({"error": "Invalid OTP"}, status=400)
+
+    user = User.objects.create_user(
+        username=email,
+        email=email,
+        password=password
+    )
+
+    record.delete()
+
+    return Response({"message": "Account created successfully"})

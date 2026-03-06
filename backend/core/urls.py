@@ -19,6 +19,8 @@ from jobs.views import delete_job_api
 
 from recruiter.views import bulk_analyze
 
+from accounts.views import send_otp, verify_otp
+
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -43,6 +45,8 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/register/', register_api),
     path('api/recruiter/analyze/', bulk_analyze),
+    path('api/send-otp/', send_otp),
+    path('api/verify-otp/', verify_otp),
 ]
     
 
