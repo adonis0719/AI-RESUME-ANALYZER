@@ -11,6 +11,7 @@ export class DashboardComponent implements OnInit {
 
   loading = false;
 
+  animatedScore: number = 0
   resumes: any[] = [];
   jobs: any[] = [];
 
@@ -87,7 +88,7 @@ export class DashboardComponent implements OnInit {
       });
   }
   
-compare() {
+  compare() {
 
     if (!this.selectedResumeId || !this.selectedJobId) {
       alert("Please select both resume and job.");
@@ -102,6 +103,22 @@ compare() {
         next: (res) => {
           this.result = res;
           this.loading = false;
+
+          this.animatedScore = 0;
+          const target = res.overall_match_percentage;
+
+          const step = target / 40;   // controls animation smoothness
+
+          const interval = setInterval(() => {
+
+            if (this.animatedScore < target) {
+              this.animatedScore = +(this.animatedScore + step).toFixed(2);
+            } else {
+              this.animatedScore = target;
+              clearInterval(interval);
+            }
+
+          }, 20);
 
           setTimeout(() => {
             const el = document.getElementById("resultSection");
@@ -148,7 +165,28 @@ compare() {
       .subscribe(() => {
         this.loadJobs();
       });
-  }  
+  }
+  
+  getScoreLabel(score: number) {
+
+    if (score >= 90) return "Excellent Match";
+    if (score >= 70) return "Good Match";
+    if (score >= 50) return "Average Match";
+
+    return "Poor Match";
+
+  }
+
+
+  getScoreColor(score: number) {
+
+    if (score >= 90) return "bg-success";
+    if (score >= 70) return "bg-primary";
+    if (score >= 50) return "bg-warning";
+
+    return "bg-danger";
+
+  }
 
   toggleTheme() {
     this.currentTheme =

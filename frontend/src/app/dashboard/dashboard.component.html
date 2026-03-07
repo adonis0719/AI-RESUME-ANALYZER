@@ -151,13 +151,28 @@
     <!-- RESULTS -->
     <div *ngIf="result" class="card-section" id="resultSection">
 
-      <!-- OVERALL SCORE -->
-      <div class="score-box">
-        <div class="score-number">
-          {{ result.overall_match_percentage }}%
-        </div>
-        <div class="score-label">Overall Match</div>
+<!-- OVERALL SCORE -->
+
+    <div class="score-box">
+
+      <div class="score-number">
+        {{ animatedScore | number:'1.2-2' }}%
       </div>
+
+      <div class="score-label">
+        {{ getScoreLabel(animatedScore) }}
+      </div>
+
+      <!-- PROGRESS BAR -->
+
+      <div class="progress mt-3" style="height:10px;">
+        <div class="progress-bar"
+            [ngClass]="getScoreColor(animatedScore)"
+            [style.width.%]="animatedScore">
+        </div>
+      </div>
+
+    </div>
 
       <hr>
 
