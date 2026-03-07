@@ -11,14 +11,14 @@
         </p>
       </div>
 
-      <button class="theme-btn" (click)="toggleTheme()">
+      <!--<button class="theme-btn" (click)="toggleTheme()">
         {{ currentTheme === 'light' ? 'Dark Mode' : 'Light Mode' }}
-      </button>
+      </button> -->
     </div>
-
+    <!--
     <button routerLink="/recruiter" class="btn btn-primary">
     Recruiter Resume Analyzer
-    </button>
+    </button>-->
 
     <!-- UPLOAD SECTION -->
     <div class="card-section">
@@ -149,7 +149,7 @@
     </div>
 
     <!-- RESULTS -->
-    <div *ngIf="result" class="card-section">
+    <div *ngIf="result" class="card-section" id="resultSection">
 
       <!-- OVERALL SCORE -->
       <div class="score-box">

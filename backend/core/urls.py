@@ -7,7 +7,7 @@ from resumes.views import upload_resume
 from jobs.views import upload_job
 from matching.views import compare
 from accounts.views import register, user_login, user_logout
-from accounts.views import register_api
+# from accounts.views import register_api
 
 
 from resumes.views import resume_list_api
@@ -20,6 +20,13 @@ from jobs.views import delete_job_api
 from recruiter.views import bulk_analyze
 
 from accounts.views import send_otp, verify_otp
+
+from accounts.views import login_user
+
+from accounts.views import forgot_password
+from accounts.views import reset_password
+from accounts.views import get_profile, update_profile
+from accounts.views import change_password
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -43,10 +50,18 @@ urlpatterns = [
     path('api/compare/', compare_api),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/register/', register_api),
+    # path('api/register/', register_api),
     path('api/recruiter/analyze/', bulk_analyze),
     path('api/send-otp/', send_otp),
     path('api/verify-otp/', verify_otp),
+    path('api/login/', login_user),
+    path('api/forgot-password/', forgot_password),
+    path('api/reset-password/', reset_password),
+    path('api/profile/', get_profile),
+    path('api/profile/update/', update_profile),
+    path('api/change-password/',change_password),
+
+
 ]
     
 

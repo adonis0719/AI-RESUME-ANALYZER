@@ -1,42 +1,62 @@
-<div class="auth-wrapper">
+<div class="container mt-4">
 
-  <!-- Glow Effects -->
-  <div class="bg-circle bg-circle-1"></div>
-  <div class="bg-circle bg-circle-2"></div>
+<h2>Register</h2>
 
-  <div class="auth-card">
+<!-- STEP 1 : EMAIL + PASSWORD -->
 
-    <div class="brand-section">
-      <h1 class="brand-title">AI Resume Analyzer</h1>
-      <p class="brand-subtitle">
-        Create your account to get started
-      </p>
-    </div>
+<div *ngIf="step === 1">
 
-    <input type="text"
-           [(ngModel)]="username"
-           placeholder="Username"
-           class="form-control modern-input">
+<div class="mb-3">
+<label>Username</label>
+<input type="text"
+[(ngModel)]="username"
+class="form-control">
+</div>
 
-    <input type="email"
-           [(ngModel)]="email"
-           placeholder="Email"
-           class="form-control modern-input">
+<div class="mb-3">
+<label>Email</label>
+<input type="email"
+[(ngModel)]="email"
+class="form-control">
+</div>
 
-    <input type="password"
-           [(ngModel)]="password"
-           placeholder="Password"
-           class="form-control modern-input">
+<div class="mb-3">
+<label>Password</label>
+<input type="password"
+[(ngModel)]="password"
+class="form-control">
+</div>
 
-    <button class="btn auth-btn w-100"
-            (click)="register()">
-      Create Account
-    </button>
+<div class="mb-3">
+<label>Confirm Password</label>
+<input type="password"
+[(ngModel)]="confirmPassword"
+class="form-control">
+</div>
 
-    <p class="auth-link">
-      Already have an account?
-      <a routerLink="/login">Login</a>
-    </p>
+<button class="btn btn-dark"
+(click)="sendOtp()">
+Send OTP
+</button>
 
-  </div>
+</div>
+
+<!-- STEP 2 : OTP -->
+
+<div *ngIf="step === 2">
+
+<div class="mb-3">
+<label>Enter OTP</label>
+<input type="text"
+[(ngModel)]="otp"
+class="form-control">
+</div>
+
+<button class="btn btn-success"
+(click)="verifyOtp()">
+Verify OTP & Create Account
+</button>
+
+</div>
+
 </div>

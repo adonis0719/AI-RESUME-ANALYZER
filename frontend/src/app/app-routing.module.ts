@@ -5,6 +5,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegisterComponent } from './register/register.component';
 import { RecruiterComponent } from './recruiter/recruiter.component';
 import { RecruiterDetailsComponent } from './recruiter-details/recruiter-details.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -12,7 +14,9 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'register', component: RegisterComponent },
   {path: 'recruiter', component: RecruiterComponent},
-  {path: 'recruiter-details', component: RecruiterDetailsComponent}
+  {path: 'recruiter-details', component: RecruiterDetailsComponent},
+  {path: 'forgot-password', component: ForgotPasswordComponent},
+  {path:'profile', component: ProfileComponent}
 ];
 
 @NgModule({

@@ -15,6 +15,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegisterComponent } from './register/register.component';
 import { RecruiterComponent } from './recruiter/recruiter.component';
 import { RecruiterDetailsComponent } from './recruiter-details/recruiter-details.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { RecruiterDetailsComponent } from './recruiter-details/recruiter-details
     DashboardComponent,
     RegisterComponent,
     RecruiterComponent,
-    RecruiterDetailsComponent
+    RecruiterDetailsComponent,
+    ForgotPasswordComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

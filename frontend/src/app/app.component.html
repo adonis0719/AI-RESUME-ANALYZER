@@ -1,1 +1,24 @@
-<router-outlet></router-outlet>
+<nav *ngIf="isLoggedIn()" class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+
+<a class="navbar-brand" routerLink="/dashboard">
+AI Resume Analyzer
+</a>
+
+<div class="navbar-nav ms-4">
+  <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+  <a class="nav-link" routerLink="/recruiter">Recruiter Analyzer</a>
+  <a class="nav-link" routerLink="/profile">Profile</a>
+  <a class="nav-link" (click)="logout()">Logout</a>
+</div>
+
+<div class="ms-auto">
+  <button class="btn btn-outline-light btn-sm" (click)="toggleTheme()">
+    Dark Mode
+  </button>
+</div>
+
+</nav>
+
+<div>
+  <router-outlet></router-outlet>
+</div>

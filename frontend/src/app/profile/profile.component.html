@@ -1,0 +1,57 @@
+<div class="container mt-5">
+
+<h2 class="mb-4">Profile Settings</h2>
+
+<div class="card p-4 shadow-sm">
+
+<h5 class="mb-3">Account Information</h5>
+
+<div class="mb-3">
+<label class="form-label">Username</label>
+<input type="text" class="form-control" [(ngModel)]="username">
+</div>
+
+<div class="mb-3">
+<label class="form-label">Email</label>
+<input type="text" class="form-control" [(ngModel)]="email" disabled>
+</div>
+
+<div class="mb-3">
+<label class="form-label">Profile Name</label>
+<input type="text" class="form-control" [(ngModel)]="profile_name">
+</div>
+
+<button class="btn btn-primary mt-2" (click)="updateProfile()">
+Save Profile Changes
+</button>
+
+</div>
+
+<br>
+
+<div class="card p-4 shadow-sm">
+
+<h5 class="mb-3">Change Password</h5>
+
+<div class="mb-3">
+<label class="form-label">Current Password</label>
+<input type="password" class="form-control" [(ngModel)]="currentPassword">
+</div>
+
+<div class="mb-3">
+<label class="form-label">New Password</label>
+<input type="password" class="form-control" [(ngModel)]="newPassword">
+</div>
+
+<div class="mb-3">
+<label class="form-label">Confirm Password</label>
+<input type="password" class="form-control" [(ngModel)]="confirmPassword">
+</div>
+
+<button class="btn btn-warning" (click)="changePassword()">
+Update Password
+</button>
+
+</div>
+
+</div>

@@ -87,7 +87,7 @@ export class DashboardComponent implements OnInit {
       });
   }
   
-  compare() {
+compare() {
 
     if (!this.selectedResumeId || !this.selectedJobId) {
       alert("Please select both resume and job.");
@@ -102,6 +102,13 @@ export class DashboardComponent implements OnInit {
         next: (res) => {
           this.result = res;
           this.loading = false;
+
+          setTimeout(() => {
+            const el = document.getElementById("resultSection");
+            if (el) {
+              el.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }, 100);
         },
         error: (err) => {
           console.log(err);

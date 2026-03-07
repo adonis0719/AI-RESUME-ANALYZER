@@ -24,7 +24,7 @@
                [(ngModel)]="username"
                name="username"
                class="form-control modern-input"
-               placeholder="Username">
+               placeholder="Username or EmailID">
       </div>
 
       <div class="form-group">
@@ -39,6 +39,10 @@
               (click)="login()">
         Login
       </button>
+
+      <p>
+        <a routerLink="/forgot-password">Forgot Password?</a>
+      </p>
 
       <p class="signup-text">
         Don’t have an account?
