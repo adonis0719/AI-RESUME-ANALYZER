@@ -8,10 +8,18 @@
   overflow: hidden;
 }
 
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 30%, #1e293b 70%, #0f172a 100%);
+  background-attachment: fixed;
+}
+
 .register-page .auth-bg {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+  display: none;
   z-index: 0;
 }
 
@@ -47,13 +55,12 @@
 
 .register-page .auth-container {
   position: relative;
-  z-index: 2;
   width: 100%;
   max-width: 440px;
 }
 
 .register-page .auth-card {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--bg-card);
   backdrop-filter: blur(20px);
   border-radius: 24px;
   padding: 48px 40px;
@@ -73,7 +80,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #059669, #10b981);
+  background: var(--color-primary);
   color: white;
   border-radius: 16px;
   font-size: 2rem;
@@ -107,13 +114,13 @@
 .register-page .input-wrapper { position: relative; }
 .register-page .input-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-size: 1.1rem; }
 .register-page .form-input { width: 100%; padding: 14px 16px 14px 48px; border: 1px solid #e2e8f0; border-radius: 12px; font-size: 1rem; background: #f8fafc; transition: all 0.2s; }
-.register-page .form-input:focus { outline: none; border-color: #059669; box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2); background: white; }
-.register-page .btn-auth-primary { width: 100%; padding: 14px 24px; background: linear-gradient(135deg, #059669, #10b981); border: none; border-radius: 12px; color: white; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 8px; }
-.register-page .btn-auth-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(5, 150, 105, 0.4); }
+.register-page .form-input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); background: white; }
+.register-page .btn-auth-primary { width: 100%; padding: 14px 24px; background: var(--color-primary); border: none; border-radius: 12px; color: white; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 8px; }
+.register-page .btn-auth-primary:hover:not(:disabled) { transform: translateY(-2px); }
 .register-page .btn-auth-primary:disabled { opacity: 0.8; cursor: not-allowed; }
 .register-page .btn-loading { display: inline-flex; align-items: center; gap: 8px; }
 .register-page .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .register-page .auth-footer-text { text-align: center; margin-top: 24px; font-size: 0.95rem; color: #64748b; }
-.register-page .auth-footer-text a { color: #059669; font-weight: 600; text-decoration: none; }
+.register-page .auth-footer-text a { color: var(--color-primary); font-weight: 600; text-decoration: none; }
 .register-page .auth-footer-text a:hover { text-decoration: underline; }

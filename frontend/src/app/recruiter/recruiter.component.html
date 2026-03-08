@@ -1,31 +1,24 @@
-<div class="page-container">
-  <div class="recruiter-header animate-in">
-    <h1 class="page-title">
-      <i class="bi bi-briefcase-fill me-2"></i>Recruiter Resume Screening
-    </h1>
-    <p class="page-subtitle">Bulk analyze and rank resumes against job descriptions</p>
-  </div>
+<div class="page-container recruiter-page">
+  <header class="recruiter-header animate-in">
+    <h1 class="page-title">Recruiter Resume Screening</h1>
+  </header>
 
   <div class="recruiter-content">
-    <!-- Upload Section -->
-    <div class="recruiter-card animate-in animate-delay-1">
-      <div class="recruiter-card-header">
-        <i class="bi bi-upload"></i>
-        <h2>Upload & Analyze</h2>
+    <!-- Upload Section - Two columns -->
+    <div class="recruiter-upload-section animate-in animate-delay-1">
+      <div class="upload-col upload-resumes">
+        <label class="form-label">Upload Resumes</label>
+        <div class="file-zone" (click)="fileInput.click()">
+          <input #fileInput type="file" multiple (change)="onFileSelect($event)" class="file-input-hidden">
+          <i class="bi bi-cloud-arrow-up"></i>
+          <p>Drag and drop multiple resumes</p>
+          <button type="button" class="btn-choose">Choose Files</button>
+          <span class="file-count" *ngIf="files.length">{{ files.length }} Files</span>
+        </div>
       </div>
-      <div class="recruiter-card-body">
-        <div class="form-group">
-          <label class="form-label">Select Resumes (multiple)</label>
-          <div class="file-upload-zone" (click)="fileInput.click()">
-            <input #fileInput type="file" multiple (change)="onFileSelect($event)" class="file-input-hidden">
-            <i class="bi bi-cloud-arrow-up"></i>
-            <p>{{ files.length ? files.length + ' file(s) selected' : 'Click or drop files here' }}</p>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Job Description</label>
-          <textarea [(ngModel)]="jobDescription" rows="6" class="form-textarea" placeholder="Paste the full job description here"></textarea>
-        </div>
+      <div class="upload-col upload-job">
+        <label class="form-label">Job Description</label>
+        <textarea [(ngModel)]="jobDescription" rows="8" class="form-textarea" placeholder="Paste job description here..."></textarea>
         <button class="btn-analyze" (click)="analyze()" [disabled]="loading">
           <span *ngIf="!loading"><i class="bi bi-graph-up-arrow me-2"></i>Analyze</span>
           <span *ngIf="loading" class="btn-loading"><span class="spinner"></span> Analyzing...</span>
@@ -34,52 +27,35 @@
     </div>
 
     <!-- Results Section -->
-    <div *ngIf="results.length" class="recruiter-results animate-in animate-delay-2" id="recruiterResultsSection">
-      <div class="results-header">
-        <h2>Ranked Resumes</h2>
-        <div class="results-actions">
-          <button class="btn-download" (click)="downloadReport()">
-            <i class="bi bi-download me-2"></i>Download Report
-          </button>
-          <button class="btn-clear" (click)="clearResults()">
-            <i class="bi bi-trash me-2"></i>Clear
+    <div *ngIf="results.length" class="recruiter-results animate-in" id="recruiterResultsSection">
+      <div class="results-toolbar">
+        <button class="btn-download" (click)="downloadReport()">
+          <i class="bi bi-download me-2"></i>Download Report
+        </button>
+        <button class="btn-clear" (click)="clearResults()">Clear Results</button>
+      </div>
+
+      <div class="rank-cards">
+        <div class="rank-card" *ngFor="let r of results; let i = index">
+          <span class="rank-label">Rank {{ i + 1 }}</span>
+          <div class="rank-circle" [style.--value]="r.score">
+            <span>{{ r.score }}%</span>
+          </div>
+          <button class="btn-full-analysis" (click)="openDetails(r)">
+            <i class="bi bi-bar-chart me-2"></i>Full Analysis
           </button>
         </div>
       </div>
 
-      <div class="results-table-wrapper">
-        <table class="results-table">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Resume</th>
-              <th>Score</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let r of results; let i = index">
-              <td>
-                <span class="rank-badge" [class.top]="i < 3">{{ i + 1 }}</span>
-              </td>
-              <td>
-                <a [href]="'http://127.0.0.1:8000' + r.file_url" target="_blank" class="resume-link">
-                  {{ r.name }}
-                </a>
-              </td>
-              <td>
-                <span class="score-value" [class.high]="r.score >= 70" [class.medium]="r.score >= 50 && r.score < 70" [class.low]="r.score < 50">
-                  {{ r.score }}%
-                </span>
-              </td>
-              <td>
-                <button class="btn-details" (click)="openDetails(r)">
-                  <i class="bi bi-eye me-1"></i>More Details
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="resume-list">
+        <h4>Resumes</h4>
+        <ul>
+          <li *ngFor="let r of results; let i = index">
+            <i class="bi bi-file-earmark-pdf"></i>
+            <a [href]="'http://127.0.0.1:8000' + r.file_url" target="_blank">{{ r.name }}</a>
+            <span class="rank-badge">Rank {{ i + 1 }}</span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

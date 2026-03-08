@@ -1,243 +1,162 @@
-<div class="dashboard" [ngClass]="currentTheme">
-
-  <!-- Animated background -->
-  <div class="dashboard-bg"></div>
+<div class="dashboard-page">
 
   <div class="container-main">
 
-    <!-- HEADER -->
-    <header class="dashboard-header">
-      <div class="header-content">
-        <h1 class="header-title">AI Resume Analyzer</h1>
-        <p class="subtitle">
-          Compare resumes with job descriptions intelligently
-        </p>
-      </div>
+    <!-- GLOBAL DASHBOARD HEADER -->
+    <header class="dashboard-header animate-in">
+      <h1 class="page-title">Global Dashboard</h1>
     </header>
 
-    <!-- UPLOAD SECTION -->
-    <section class="card-section card-modern animate-in">
-      <div class="row g-4">
+    <!-- ACTION CARDS -->
+    <div class="action-cards animate-in animate-delay-1">
+      <div class="action-card" (click)="scrollToCompare()">
+        <div class="action-card-icon"><i class="bi bi-plus-lg"></i></div>
+        <h3>Analyze New Pair</h3>
+        <p>Analyze new resume and job description. Get match insights.</p>
+      </div>
+      <a class="action-card" routerLink="/recruiter">
+        <div class="action-card-icon"><i class="bi bi-grid-3x3-gap"></i></div>
+        <h3>Bulk Screen</h3>
+        <p>Analyze multiple resumes for quick screening.</p>
+      </a>
+    </div>
 
+    <!-- STATS ROW -->
+    <div class="stats-row animate-in animate-delay-1">
+      <div class="stat-card stat-overall">
+        <h3>Overall Average Match</h3>
+        <div class="water-circle" [style.--fill]="(result ? animatedScore : 0)">
+          <div class="water-fill">
+            <div class="water-wave"></div>
+            <div class="water-wave wave-2"></div>
+          </div>
+          <span class="circle-value">{{ (result ? animatedScore : 0) | number:'1.1-1' }}%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECENT RESUMES & JOBS -->
+    <div class="recent-row animate-in animate-delay-2">
+      <div class="recent-card">
+        <h3>Recent Resumes</h3>
+        <ul class="recent-list">
+          <li *ngFor="let r of resumes" class="recent-item">
+            <i class="bi bi-file-earmark-text"></i>
+            <span>{{ r.title }}</span>
+            <div class="item-actions">
+              <button (click)="viewResume(r.file)" title="View"><i class="bi bi-eye"></i></button>
+              <button (click)="deleteResume(r.id)" title="Delete"><i class="bi bi-trash"></i></button>
+            </div>
+          </li>
+        </ul>
+        <p *ngIf="!resumes?.length" class="empty-msg">No resumes yet</p>
+      </div>
+      <div class="recent-card">
+        <h3>Recent Job Descriptions</h3>
+        <ul class="recent-list">
+          <li *ngFor="let j of jobs" class="recent-item">
+            <i class="bi bi-file-earmark-text"></i>
+            <span>{{ j.title }}</span>
+            <div class="item-actions">
+              <button (click)="deleteJob(j.id)" title="Delete"><i class="bi bi-trash"></i></button>
+            </div>
+          </li>
+        </ul>
+        <p *ngIf="!jobs?.length" class="empty-msg">No jobs yet</p>
+      </div>
+    </div>
+
+    <!-- UPLOAD & COMPARE SECTION -->
+    <section class="card-section animate-in" id="compareSection">
+      <h3 class="section-title">Analyze New Pair</h3>
+      <div class="row g-4">
         <div class="col-lg-6">
           <div class="upload-card">
-            <div class="upload-card-icon">
-              <i class="bi bi-file-earmark-person"></i>
-            </div>
-            <h5 class="section-title">Resume</h5>
-
-            <input class="form-control input-clean mb-3"
-                   placeholder="Resume Title"
-                   [(ngModel)]="resumeTitle">
-
-            <div class="file-input-wrapper mb-3">
-              <input class="form-control input-clean"
-                     type="file"
-                     (change)="onFileSelected($event)">
-            </div>
-
-            <button class="btn btn-upload btn-primary w-100"
-                    (click)="uploadResume()">
+            <h5>Resume</h5>
+            <input class="form-input mb-3" placeholder="Resume Title" [(ngModel)]="resumeTitle">
+            <input class="form-input mb-3" type="file" (change)="onFileSelected($event)">
+            <button class="btn-primary" (click)="uploadResume()">
               <i class="bi bi-cloud-upload me-2"></i>Upload Resume
             </button>
           </div>
         </div>
-
         <div class="col-lg-6">
           <div class="upload-card">
-            <div class="upload-card-icon upload-card-icon-success">
-              <i class="bi bi-briefcase"></i>
-            </div>
-            <h5 class="section-title">Job Description</h5>
-
-            <input class="form-control input-clean mb-3"
-                   placeholder="Job Title"
-                   [(ngModel)]="jobTitle">
-
-            <textarea class="form-control input-clean mb-3"
-                      rows="6"
-                      placeholder="Paste Job Description"
-                      [(ngModel)]="jobText"></textarea>
-
-            <button class="btn btn-upload btn-success w-100"
-                    (click)="uploadJob()">
+            <h5>Job Description</h5>
+            <input class="form-input mb-3" placeholder="Job Title" [(ngModel)]="jobTitle">
+            <textarea class="form-input mb-3" rows="4" placeholder="Paste Job Description" [(ngModel)]="jobText"></textarea>
+            <button class="btn-success" (click)="uploadJob()">
               <i class="bi bi-cloud-upload me-2"></i>Upload Job
             </button>
           </div>
         </div>
-
       </div>
-    </section>
 
-    <!-- SAVED RESUMES & JOBS -->
-    <section class="card-section card-modern animate-in animate-delay-1">
-      <div class="row g-4">
-
-        <div class="col-lg-6">
-          <h5 class="section-title mb-4">
-            <i class="bi bi-folder2-open me-2"></i>Your Resumes
-          </h5>
-
-          <ul class="list-modern mb-0">
-            <li class="list-item-modern d-flex justify-content-between align-items-center"
-                *ngFor="let r of resumes">
-              <span class="list-item-label">{{ r.title }}</span>
-              <div class="list-item-actions">
-                <button class="btn btn-action btn-action-primary btn-sm"
-                        (click)="viewResume(r.file)">
-                  <i class="bi bi-eye me-1"></i>View
-                </button>
-                <button class="btn btn-action btn-action-danger btn-sm"
-                        (click)="deleteResume(r.id)">
-                  <i class="bi bi-trash me-1"></i>Delete
-                </button>
-              </div>
-            </li>
-          </ul>
-          <p *ngIf="!resumes?.length" class="text-muted small mb-0 py-3">No resumes yet. Upload one above.</p>
+      <div class="compare-row">
+        <div class="compare-selects">
+          <div class="form-group">
+            <label>Resume</label>
+            <select class="form-select" [(ngModel)]="selectedResumeId">
+              <option value="">Select Resume</option>
+              <option *ngFor="let r of resumes" [value]="r.id">{{ r.title }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Job</label>
+            <select class="form-select" [(ngModel)]="selectedJobId">
+              <option value="">Select Job</option>
+              <option *ngFor="let j of jobs" [value]="j.id">{{ j.title }}</option>
+            </select>
+          </div>
         </div>
-
-        <div class="col-lg-6">
-          <h5 class="section-title mb-4">
-            <i class="bi bi-briefcase me-2"></i>Your Job Descriptions
-          </h5>
-
-          <ul class="list-modern mb-0">
-            <li class="list-item-modern d-flex justify-content-between align-items-center"
-                *ngFor="let j of jobs">
-              <span class="list-item-label">{{ j.title }}</span>
-              <div class="list-item-actions">
-                <button class="btn btn-action btn-action-danger btn-sm"
-                        (click)="deleteJob(j.id)">
-                  <i class="bi bi-trash me-1"></i>Delete
-                </button>
-              </div>
-            </li>
-          </ul>
-          <p *ngIf="!jobs?.length" class="text-muted small mb-0 py-3">No jobs yet. Add one above.</p>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- COMPARE SECTION -->
-    <section class="card-section card-modern compare-section animate-in animate-delay-2">
-      <h5 class="section-title mb-4">
-        <i class="bi bi-arrow-left-right me-2"></i>Compare
-      </h5>
-
-      <div class="row g-3 align-items-end">
-        <div class="col-md-5">
-          <label class="form-label">Resume</label>
-          <select class="form-select input-clean select-modern"
-                  [(ngModel)]="selectedResumeId">
-            <option value="">Select Resume</option>
-            <option *ngFor="let r of resumes" [value]="r.id">
-              {{ r.title }}
-            </option>
-          </select>
-        </div>
-
-        <div class="col-md-5">
-          <label class="form-label">Job</label>
-          <select class="form-select input-clean select-modern"
-                  [(ngModel)]="selectedJobId">
-            <option value="">Select Job</option>
-            <option *ngFor="let j of jobs" [value]="j.id">
-              {{ j.title }}
-            </option>
-          </select>
-        </div>
-
-        <div class="col-md-2 d-grid">
-          <button class="btn btn-compare w-100"
-                  (click)="compare()"
-                  [disabled]="loading">
-
-            <span *ngIf="!loading" class="btn-compare-text">
-              <i class="bi bi-graph-up me-2"></i>Compare
-            </span>
-
-            <span *ngIf="loading" class="btn-compare-loading">
-              <span class="spinner-modern"></span>
-              Analyzing...
-            </span>
-
-          </button>
-        </div>
+        <button class="btn-analyze" (click)="compare()" [disabled]="loading">
+          <span *ngIf="!loading"><i class="bi bi-graph-up me-2"></i>Compare</span>
+          <span *ngIf="loading" class="btn-loading"><span class="spinner"></span> Analyzing...</span>
+        </button>
       </div>
     </section>
 
     <!-- RESULTS -->
-    <div *ngIf="result" class="card-section card-modern result-section" id="resultSection">
-
-      <!-- OVERALL SCORE -->
-      <div class="score-box">
-        <div class="score-number">{{ animatedScore | number:'1.2-2' }}%</div>
+    <div *ngIf="result" class="card-section result-section animate-in" id="resultSection">
+      <div class="score-hero">
+        <div class="water-circle water-circle-lg" [style.--fill]="animatedScore">
+          <div class="water-fill">
+            <div class="water-wave"></div>
+            <div class="water-wave wave-2"></div>
+          </div>
+          <span class="circle-value">{{ animatedScore | number:'1.2-2' }}%</span>
+        </div>
         <div class="score-label">{{ getScoreLabel(animatedScore) }}</div>
-
-        <div class="progress progress-modern mt-3">
-          <div class="progress-bar progress-bar-animated"
-              [ngClass]="getScoreColor(animatedScore)"
-              [style.width.%]="animatedScore">
+        <div class="progress-bar-pro">
+          <div class="progress-bar-track">
+            <div class="progress-fill-pro" [ngClass]="getScoreColor(animatedScore)" [style.width.%]="animatedScore">
+              <span class="progress-shine"></span>
+            </div>
+          </div>
+          <div class="progress-bar-labels">
+            <span>0%</span>
+            <span>100%</span>
           </div>
         </div>
       </div>
 
-      <hr class="section-divider">
-
-      <!-- CATEGORY BREAKDOWN -->
-      <div class="row g-4 mt-2 category-grid">
-        <div class="col-md-6 col-lg-4"
-             *ngFor="let category of result.category_match | keyvalue">
-
-          <div class="category-card">
-            <h6 class="category-title text-capitalize">
-              {{ category.key.replace('_',' ') }}
-            </h6>
-
-            <p class="percentage">
-              {{ category.value.percentage }}% Match
-            </p>
-
-            <div class="skill-group">
-              <strong class="skill-label">Matched</strong>
-              <div class="chip-group">
-                <span class="chip success"
-                     *ngFor="let skill of category.value.matched">
-                  {{ skill }}
-                </span>
-              </div>
-            </div>
-
-            <div class="skill-group mt-2">
-              <strong class="skill-label">Missing</strong>
-              <div class="chip-group">
-                <span class="chip danger"
-                     *ngFor="let skill of category.value.missing">
-                  {{ skill }}
-                </span>
-              </div>
-            </div>
-
+      <div class="category-grid">
+        <div class="category-card" *ngFor="let category of result.category_match | keyvalue">
+          <h6 class="category-title">{{ category.key.replace('_',' ') }}</h6>
+          <p class="category-pct">{{ category.value.percentage }}% Match</p>
+          <div class="skill-tags">
+            <span class="tag matched" *ngFor="let s of category.value.matched">{{ s }}</span>
+            <span class="tag missing" *ngFor="let s of category.value.missing">{{ s }}</span>
           </div>
         </div>
-
       </div>
 
-      <hr class="section-divider my-4">
-
-      <!-- INTERVIEW QUESTIONS -->
       <div class="questions-block">
-        <h5 class="section-title">
-          <i class="bi bi-chat-quote me-2"></i>Interview Questions
-        </h5>
-
+        <h5><i class="bi bi-chat-quote me-2"></i>Interview Preparation</h5>
         <ul class="question-list">
           <li *ngFor="let q of result.interview_questions">{{ q }}</li>
         </ul>
       </div>
-
     </div>
 
   </div>

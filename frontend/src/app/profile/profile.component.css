@@ -2,16 +2,16 @@
   margin-bottom: 40px;
 }
 
-.page-title {
+.profile-header .page-title {
   font-size: 1.75rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #f8fafc;
   margin: 0 0 8px;
 }
 
-.page-subtitle {
+.profile-header .page-subtitle {
   font-size: 1rem;
-  color: var(--text-secondary);
+  color: #94a3b8;
   margin: 0;
 }
 

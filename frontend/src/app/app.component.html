@@ -1,7 +1,7 @@
 <nav *ngIf="isLoggedIn()" class="app-navbar">
   <div class="nav-inner">
     <a class="nav-brand" routerLink="/dashboard">
-      <span class="nav-brand-icon"><i class="bi bi-file-earmark-person-fill"></i></span>
+      <span class="nav-brand-icon">A</span>
       <span class="nav-brand-text">AI Resume Analyzer</span>
     </a>
 
@@ -17,7 +17,7 @@
         </a>
         <a class="nav-link" routerLink="/recruiter" routerLinkActive="active">
           <i class="bi bi-briefcase-fill"></i>
-          <span>Recruiter</span>
+          <span>Recruiter Analyzer</span>
         </a>
         <a class="nav-link" routerLink="/profile" routerLinkActive="active">
           <i class="bi bi-person-fill"></i>
@@ -28,12 +28,9 @@
           <span>Logout</span>
         </a>
       </div>
-      <div class="nav-actions">
-        <button class="btn-theme" (click)="toggleTheme()" [title]="themeService.getTheme() === 'light' ? 'Switch to dark mode' : 'Switch to light mode'">
-          <i class="bi" [ngClass]="themeService.getTheme() === 'light' ? 'bi-moon-stars-fill' : 'bi-sun-fill'"></i>
-          <span>{{ themeService.getTheme() === 'light' ? 'Dark' : 'Light' }}</span>
-        </button>
-      </div>
+      <button class="btn-theme" (click)="toggleTheme()" [title]="themeService.getTheme() === 'light' ? 'Dark mode' : 'Light mode'">
+        <i class="bi" [ngClass]="themeService.getTheme() === 'light' ? 'bi-moon-stars-fill' : 'bi-sun-fill'"></i>
+      </button>
     </div>
   </div>
 </nav>

@@ -195,4 +195,9 @@ export class DashboardComponent implements OnInit {
   toggleTheme() {
     this.themeService.toggleTheme();
   }
+
+  scrollToCompare() {
+    const el = document.getElementById('compareSection');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }

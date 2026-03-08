@@ -10,7 +10,7 @@ export class ThemeService {
     if (typeof localStorage !== 'undefined') {
       const saved = localStorage.getItem('theme') as 'light' | 'dark' | null;
       if (saved === 'light' || saved === 'dark') this.setTheme(saved);
-      else this.setTheme('light');
+      else this.setTheme('dark');
     }
   }
 
@@ -22,7 +22,11 @@ export class ThemeService {
     this.themeSubject.next(theme);
     localStorage.setItem('theme', theme);
     document.body.setAttribute('data-theme', theme);
-    document.body.style.backgroundColor = theme === 'dark' ? '#0f172a' : '#f8fafc';
+    if (theme === 'dark') {
+      document.body.style.background = 'linear-gradient(135deg, #1e1b4b 0%, #312e81 30%, #1e293b 70%, #0f172a 100%)';
+    } else {
+      document.body.style.background = '#f8fafc';
+    }
     document.body.style.color = theme === 'dark' ? '#f8fafc' : '#0f172a';
   }
 

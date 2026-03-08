@@ -1,34 +1,45 @@
 <div class="page-container">
   <div *ngIf="resume" class="details-page animate-in">
-    <div class="details-header">
-      <a routerLink="/recruiter" class="back-link">
-        <i class="bi bi-arrow-left me-2"></i>Back to Recruiter
+    <div class="details-header-row">
+      <h1 class="page-title">Candidate Match: {{ getDisplayName(resume.name) }}</h1>
+      <a [href]="getResumeUrl()" target="_blank" class="btn-view-resume">
+        <i class="bi bi-file-earmark-pdf me-2"></i>View Resume
       </a>
-      <h1 class="page-title">{{ resume.name }}</h1>
-      <div class="score-badge">
-        <span class="score-value">{{ resume.score }}%</span>
-        <span class="score-label">Match Score</span>
+    </div>
+
+    <div class="score-hero">
+      <div class="score-circle-large" [style.--value]="resume.score">
+        <span>{{ resume.score }}%</span>
+      </div>
+      <div class="score-label-row">
+        <span class="score-label">{{ getScoreLabel(resume.score) }}</span>
+        <span class="score-dot" [class.good]="resume.score >= 70" [class.average]="resume.score >= 50 && resume.score < 70" [class.poor]="resume.score < 50"></span>
       </div>
     </div>
 
-    <div class="skill-analysis-card">
-      <h2 class="section-title">
-        <i class="bi bi-bar-chart-steps me-2"></i>Skill Analysis
-      </h2>
-
-      <div *ngFor="let c of (resume.details?.category_match || {}) | keyvalue" class="category-block">
-        <h3 class="category-name">{{ c.key }}</h3>
-        <div class="skill-rows">
-          <div class="skill-row">
-            <span class="skill-label matched">Matched Skills</span>
-            <span class="skill-value">{{ getMatched(c.value).join(', ') || 'None' }}</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-label missing">Missing Skills</span>
-            <span class="skill-value">{{ getMissing(c.value).join(', ') || 'None' }}</span>
-          </div>
+    <div class="skill-cards">
+      <div class="skill-card" *ngFor="let c of (resume.details?.category_match || {}) | keyvalue">
+        <h4 class="skill-card-title">{{ c.key }}</h4>
+        <p class="skill-card-pct">{{ getCategoryPct(c.value) }}% match</p>
+        <div class="skill-tags">
+          <span class="tag matched" *ngFor="let s of getMatched(c.value)">{{ s }}</span>
+          <span class="tag missing" *ngFor="let s of getMissing(c.value)">{{ s }}</span>
         </div>
       </div>
+    </div>
+
+    <div class="interview-section" *ngIf="interviewQuestions.length">
+      <h3 class="section-title">
+        <i class="bi bi-chat-quote me-2"></i>Interview Preparation
+      </h3>
+      <ul class="interview-list">
+        <li *ngFor="let q of interviewQuestions">
+          <span>{{ q }}</span>
+          <button class="btn-copy" (click)="copyToClipboard(q)" title="Copy to clipboard">
+            <i class="bi bi-clipboard"></i>
+          </button>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

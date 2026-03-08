@@ -1,63 +1,50 @@
 <div class="auth-page login-page">
-  <div class="auth-bg">
-    <div class="auth-bg-shape auth-bg-shape-1"></div>
-    <div class="auth-bg-shape auth-bg-shape-2"></div>
-    <div class="auth-bg-shape auth-bg-shape-3"></div>
-  </div>
-
   <div class="auth-container animate-in">
     <div class="auth-card">
       <div class="auth-card-header">
-        <div class="auth-logo">
-          <i class="bi bi-file-earmark-person-fill"></i>
-        </div>
+        <div class="auth-logo">A</div>
         <h1 class="auth-title">AI Resume Analyzer</h1>
-        <p class="auth-subtitle">Intelligent resume-to-job matching</p>
+        <p class="auth-tagline">INTELLIGENT MATCHING PLATFORM</p>
       </div>
 
       <div class="auth-card-body">
-        <h2 class="auth-form-title">Welcome back</h2>
+        <h2 class="auth-form-title">Welcome Back</h2>
 
         <div class="auth-form">
           <div class="form-group">
-            <label class="form-label">Username or Email</label>
+            <label class="form-label">Username or EmailID</label>
             <div class="input-wrapper">
-              <i class="bi bi-person input-icon"></i>
               <input type="text"
                      [(ngModel)]="username"
                      name="username"
                      class="form-input"
-                     placeholder="Enter your username or email">
+                     placeholder="Username or EmailID">
             </div>
           </div>
 
           <div class="form-group">
             <label class="form-label">Password</label>
-            <div class="input-wrapper">
-              <i class="bi bi-lock input-icon"></i>
-              <input type="password"
+            <div class="input-wrapper input-password">
+              <input [type]="showPassword ? 'text' : 'password'"
                      [(ngModel)]="password"
                      name="password"
                      class="form-input"
-                     placeholder="Enter your password">
+                     placeholder="Password">
+              <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'" (click)="showPassword = !showPassword"></i>
             </div>
           </div>
+
+          <a routerLink="/forgot-password" class="auth-forgot">Forgot Password?</a>
 
           <button class="btn-auth-primary"
                   (click)="login()"
                   [disabled]="loading">
-            <span *ngIf="!loading">Sign In</span>
-            <span *ngIf="loading" class="btn-loading">
-              <span class="spinner"></span>
-              Signing in...
-            </span>
+            <span *ngIf="!loading">Login</span>
+            <span *ngIf="loading" class="btn-loading"><span class="spinner"></span> Logging in...</span>
           </button>
 
-          <a routerLink="/forgot-password" class="auth-link">Forgot password?</a>
-
           <p class="auth-footer-text">
-            Don't have an account?
-            <a routerLink="/register">Sign up</a>
+            Don't have an account? <a routerLink="/register">Sign Up</a>
           </p>
         </div>
       </div>
