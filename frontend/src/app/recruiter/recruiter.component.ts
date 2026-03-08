@@ -47,9 +47,13 @@ analyze() {
   formData.append('job_description', this.jobDescription);
   this.http.post<any>(this.api, formData).subscribe({
     next: (res) => {
-      this.results = res.ranked_resumes || [];
+      this.results = res.ranked_resumes || res || [];
       localStorage.setItem("recruiterResults", JSON.stringify(this.results));
       this.loading = false;
+      setTimeout(() => {
+        const el = document.getElementById("recruiterResultsSection");
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
     },
     error: () => { this.loading = false; }
   });

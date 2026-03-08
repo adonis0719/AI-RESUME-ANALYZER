@@ -29,6 +29,9 @@ if(data){
 this.resume = JSON.parse(data);
 }
 
+// Ensure details page always starts from top
+window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+
 }
 
 getMatched(value: any) {
