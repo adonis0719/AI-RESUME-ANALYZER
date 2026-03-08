@@ -1,16 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  darkMode = false;
+  constructor(
+    private router: Router,
+    public themeService: ThemeService
+  ) {}
 
-  constructor(private router: Router) {}
+  ngOnInit() {
+    this.themeService.setTheme(this.themeService.getTheme());
+  }
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('access_token');
@@ -22,14 +28,6 @@ export class AppComponent {
   }
 
   toggleTheme() {
-    this.darkMode = !this.darkMode;
-
-    if (this.darkMode) {
-      document.body.style.backgroundColor = "#121212";
-      document.body.style.color = "#ffffff";
-    } else {
-      document.body.style.backgroundColor = "#ffffff";
-      document.body.style.color = "#000000";
-    }
+    this.themeService.toggleTheme();
   }
 }

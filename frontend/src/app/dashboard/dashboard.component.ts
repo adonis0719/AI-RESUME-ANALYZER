@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CompareService, CompareResult } from '../services/compare.service';
 import { HttpClient } from '@angular/common/http';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,14 +27,17 @@ export class DashboardComponent implements OnInit {
   jobTitle = '';
   jobText = '';
 
-  currentTheme: string = 'light';
-
   private apiUrl = 'http://127.0.0.1:8000/api';
 
   constructor(
     private http: HttpClient,
-    private compareService: CompareService
+    private compareService: CompareService,
+    public themeService: ThemeService
   ) {}
+
+  get currentTheme() {
+    return this.themeService.getTheme();
+  }
 
   ngOnInit() {
     this.loadResumes();
@@ -189,7 +193,6 @@ export class DashboardComponent implements OnInit {
   }
 
   toggleTheme() {
-    this.currentTheme =
-      this.currentTheme === 'light' ? 'dark' : 'light';
+    this.themeService.toggleTheme();
   }
 }

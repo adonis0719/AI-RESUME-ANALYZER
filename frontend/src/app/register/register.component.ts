@@ -8,12 +8,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  username=''
+  username = '';
   email = '';
   password = '';
-  confirmPassword='';
-  otp='';
-  step=1;
+  confirmPassword = '';
+  otp = '';
+  step = 1;
+  loading = false;
 
   apiSendOtp = 'http://127.0.0.1:8000/api/send-otp/';
   apiVerifyOtp = 'http://127.0.0.1:8000/api/verify-otp/';
@@ -26,58 +27,46 @@ export class RegisterComponent {
 
 
 
-  sendOtp(){
-    if(this.password !== this.confirmPassword){
+  sendOtp() {
+    if (this.password !== this.confirmPassword) {
       alert("Passwords do not match");
       return;
     }
-
-    const body = {
-    email: this.email
-    };
-
-    this.http.post(this.apiSendOtp, body)
-    .subscribe({
-
-      next: (res:any)=>{
+    this.loading = true;
+    const body = { email: this.email };
+    this.http.post(this.apiSendOtp, body).subscribe({
+      next: () => {
+        this.loading = false;
         alert("OTP sent to your email");
         this.step = 2;
       },
-
-      error: (err)=>{
+      error: () => {
+        this.loading = false;
         alert("Failed to send OTP");
-        console.log(err);
       }
-
     });
-
   }
 
 
-  verifyOtp(){
-
+  verifyOtp() {
+    this.loading = true;
     const body = {
-      username:this.username,
+      username: this.username,
       email: this.email,
       otp: this.otp,
       password: this.password
     };
-
-    this.http.post(this.apiVerifyOtp, body)
-    .subscribe({
-
-      next: (res:any)=>{
+    this.http.post(this.apiVerifyOtp, body).subscribe({
+      next: () => {
+        this.loading = false;
         alert("Account created successfully");
         this.router.navigate(['/login']);
       },
-
-      error: (err)=>{
+      error: () => {
+        this.loading = false;
         alert("Invalid OTP");
-        console.log(err);
       }
-
     });
-
   }
 
 

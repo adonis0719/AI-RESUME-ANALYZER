@@ -11,6 +11,7 @@ export class LoginComponent {
 
   username = '';
   password = '';
+  loading = false;
 
   constructor(
     private authService: AuthService,
@@ -18,12 +19,11 @@ export class LoginComponent {
     ) {}
 
   login() {
-
+    this.loading = true;
     this.authService.login(this.username, this.password)
       .subscribe(
         (response: any) => {
-
-          console.log("Response:", response);
+          this.loading = false;
           this.authService.saveToken(response.access);
           this.router.navigate(['/dashboard']);
 
@@ -34,7 +34,7 @@ export class LoginComponent {
 
         },
         (error) => {
-          console.log("Error:", error);
+          this.loading = false;
           alert('Login failed');
         }
       );

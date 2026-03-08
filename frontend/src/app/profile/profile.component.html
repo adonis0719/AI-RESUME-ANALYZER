@@ -1,57 +1,72 @@
-<div class="container mt-5">
+<div class="page-container">
+  <div class="profile-header animate-in">
+    <h1 class="page-title">
+      <i class="bi bi-person-circle me-2"></i>Profile Settings
+    </h1>
+    <p class="page-subtitle">Manage your account and security</p>
+  </div>
 
-<h2 class="mb-4">Profile Settings</h2>
+  <div class="profile-content">
+    <!-- Account card -->
+    <div class="profile-card animate-in">
+      <div class="profile-card-header">
+        <i class="bi bi-person-badge"></i>
+        <h2>Account Information</h2>
+      </div>
+      <div class="profile-card-body">
+        <div *ngIf="loading" class="skeleton-loader">
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line short"></div>
+        </div>
 
-<div class="card p-4 shadow-sm">
+        <div *ngIf="!loading" class="profile-form">
+          <div class="form-group">
+            <label class="form-label">Username</label>
+            <input type="text" class="form-input" [(ngModel)]="username" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="text" class="form-input" [(ngModel)]="email" placeholder="Email" disabled>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Profile Name</label>
+            <input type="text" class="form-input" [(ngModel)]="profile_name" placeholder="Profile name">
+          </div>
+          <button class="btn-primary" (click)="updateProfile()" [disabled]="savingProfile">
+            <span *ngIf="!savingProfile">Save Profile</span>
+            <span *ngIf="savingProfile" class="btn-loading"><span class="spinner"></span> Saving...</span>
+          </button>
+        </div>
+      </div>
+    </div>
 
-<h5 class="mb-3">Account Information</h5>
-
-<div class="mb-3">
-<label class="form-label">Username</label>
-<input type="text" class="form-control" [(ngModel)]="username">
-</div>
-
-<div class="mb-3">
-<label class="form-label">Email</label>
-<input type="text" class="form-control" [(ngModel)]="email" disabled>
-</div>
-
-<div class="mb-3">
-<label class="form-label">Profile Name</label>
-<input type="text" class="form-control" [(ngModel)]="profile_name">
-</div>
-
-<button class="btn btn-primary mt-2" (click)="updateProfile()">
-Save Profile Changes
-</button>
-
-</div>
-
-<br>
-
-<div class="card p-4 shadow-sm">
-
-<h5 class="mb-3">Change Password</h5>
-
-<div class="mb-3">
-<label class="form-label">Current Password</label>
-<input type="password" class="form-control" [(ngModel)]="currentPassword">
-</div>
-
-<div class="mb-3">
-<label class="form-label">New Password</label>
-<input type="password" class="form-control" [(ngModel)]="newPassword">
-</div>
-
-<div class="mb-3">
-<label class="form-label">Confirm Password</label>
-<input type="password" class="form-control" [(ngModel)]="confirmPassword">
-</div>
-
-<button class="btn btn-warning" (click)="changePassword()">
-Update Password
-</button>
-
-</div>
-
+    <!-- Password card -->
+    <div class="profile-card animate-in animate-delay-1">
+      <div class="profile-card-header">
+        <i class="bi bi-shield-lock"></i>
+        <h2>Change Password</h2>
+      </div>
+      <div class="profile-card-body">
+        <div class="profile-form">
+          <div class="form-group">
+            <label class="form-label">Current Password</label>
+            <input type="password" class="form-input" [(ngModel)]="currentPassword" placeholder="Current password">
+          </div>
+          <div class="form-group">
+            <label class="form-label">New Password</label>
+            <input type="password" class="form-input" [(ngModel)]="newPassword" placeholder="New password">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" class="form-input" [(ngModel)]="confirmPassword" placeholder="Confirm password">
+          </div>
+          <button class="btn-secondary" (click)="changePassword()" [disabled]="savingPassword">
+            <span *ngIf="!savingPassword">Update Password</span>
+            <span *ngIf="savingPassword" class="btn-loading"><span class="spinner"></span> Updating...</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
