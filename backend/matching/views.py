@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from resumes.models import Resume
 from jobs.models import JobDescription
-from .matcher import calculate_match
+from .matcher import calculate_match, calculate_hybrid_match
 from django.contrib.auth.decorators import login_required
 
 from rest_framework.decorators import api_view, permission_classes
@@ -42,7 +42,12 @@ def compare_api(request):
     resume = Resume.objects.get(id=resume_id, user=request.user)
     job = JobDescription.objects.get(id=job_id, user=request.user)
 
-    result = calculate_match(resume.skills or {}, job.extracted_skills or {})
+    result = calculate_hybrid_match(
+        resume.skills or {},
+        job.extracted_skills or {},
+        resume_text=resume.extracted_text,
+        job_text=job.description,
+    )
 
     # Interview questions must be inside the function
     questions = generate_interview_questions(result.get("recommendations", []))

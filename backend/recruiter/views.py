@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from analyzer.pdf_extractor import extract_text_from_pdf, extract_email
 from analyzer.skill_extractor import extract_skills
-from matching.matcher import calculate_match
+from matching.matcher import calculate_hybrid_match
 
 
 @api_view(["POST"])
@@ -35,7 +35,12 @@ def bulk_analyze(request):
 
         resume_skills = extract_skills(text)
 
-        match = calculate_match(resume_skills, job_skills)
+        match = calculate_hybrid_match(
+            resume_skills,
+            job_skills,
+            resume_text=text,
+            job_text=job_description,
+        )
 
         score = match["overall_match_percentage"]
 

@@ -17,10 +17,12 @@ export interface Recommendation {
 
 export interface CompareResult {
   overall_match_percentage: number;
+  rule_score?: number;
+  ai_similarity?: number;
+  domain?: string;
   category_match: { [key: string]: CategoryDetail };
   recommendations: Recommendation[];
   interview_questions: string[];
-  
 }
 
 @Injectable({

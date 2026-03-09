@@ -127,6 +127,26 @@
           <span class="circle-value">{{ animatedScore | number:'1.2-2' }}%</span>
         </div>
         <div class="score-label">{{ getScoreLabel(animatedScore) }}</div>
+
+        <div class="score-breakdown" *ngIf="result">
+          <div class="breakdown-row">
+            <span class="breakdown-label">Final Score</span>
+            <span class="breakdown-value">{{ animatedScore | number:'1.1-1' }}%</span>
+          </div>
+          <div class="breakdown-row" *ngIf="result.ai_similarity != null">
+            <span class="breakdown-label">AI Similarity</span>
+            <span class="breakdown-value">{{ result.ai_similarity | number:'1.1-1' }}%</span>
+          </div>
+          <div class="breakdown-row" *ngIf="result.rule_score != null">
+            <span class="breakdown-label">Skill Match</span>
+            <span class="breakdown-value">{{ result.rule_score | number:'1.1-1' }}%</span>
+          </div>
+          <div class="breakdown-row" *ngIf="result.domain">
+            <span class="breakdown-label">Domain</span>
+            <span class="breakdown-value domain-badge">{{ result.domain }}</span>
+          </div>
+        </div>
+
         <div class="progress-bar-pro">
           <div class="progress-bar-track">
             <div class="progress-fill-pro" [ngClass]="getScoreColor(animatedScore)" [style.width.%]="animatedScore">

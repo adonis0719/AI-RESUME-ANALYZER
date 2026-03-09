@@ -1,0 +1,83 @@
+{
+  "IT": {
+    "programming_languages": 30,
+    "backend": 20,
+    "frontend": 15,
+    "databases": 15,
+    "devops": 10,
+    "software_concepts": 10,
+    "cloud": 5,
+    "mobile": 5,
+    "testing": 5,
+    "version_control": 5,
+    "security": 5
+  },
+  "DATA_SCIENCE": {
+    "data_science_ai": 35,
+    "programming_languages": 20,
+    "data_analytics_bi": 20,
+    "databases": 10,
+    "cloud": 10,
+    "software_concepts": 5
+  },
+  "ACCOUNTING": {
+    "accounting_finance": 40,
+    "erp_crm": 25,
+    "data_analytics_bi": 20,
+    "soft_skills": 15
+  },
+  "FINANCE": {
+    "finance": 35,
+    "accounting_finance": 20,
+    "data_analytics_bi": 20,
+    "erp_crm": 15,
+    "soft_skills": 10
+  },
+  "MARKETING": {
+    "marketing": 40,
+    "data_analytics_bi": 25,
+    "soft_skills": 20,
+    "creative_design": 15
+  },
+  "CUSTOMER_SUPPORT": {
+    "customer_service": 45,
+    "soft_skills": 30,
+    "erp_crm": 15,
+    "retail": 10
+  },
+  "MANAGEMENT": {
+    "soft_skills": 35,
+    "human_resources": 25,
+    "data_analytics_bi": 20,
+    "procurement": 20
+  },
+  "HEALTHCARE": {
+    "healthcare": 50,
+    "data_analytics_bi": 20,
+    "soft_skills": 15,
+    "erp_crm": 15
+  },
+  "ENGINEERING": {
+    "engineering": 45,
+    "software_concepts": 20,
+    "databases": 10,
+    "devops": 10,
+    "cloud": 15
+  },
+  "LOGISTICS": {
+    "logistics_supply_chain": 50,
+    "data_analytics_bi": 20,
+    "soft_skills": 15,
+    "erp_crm": 15
+  },
+  "LAW": {
+    "law": 60,
+    "soft_skills": 25,
+    "data_analytics_bi": 15
+  },
+  "EDUCATION": {
+    "education": 50,
+    "soft_skills": 30,
+    "data_analytics_bi": 20
+  }
+}

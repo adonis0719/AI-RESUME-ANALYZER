@@ -8,6 +8,19 @@ WEIGHTS = {
 }
 
 
+def _load_domain_weights(domain):
+    """Load weights for a domain from domain_weights.json. Returns None on failure."""
+    try:
+        import os
+        import json
+        path = os.path.join(os.path.dirname(__file__), "..", "analyzer", "domain_weights.json")
+        with open(path, "r") as f:
+            data = json.load(f)
+        return data.get(domain)
+    except Exception:
+        return None
+
+
 def generate_recommendations(category_match):
     recommendations = []
 
@@ -26,7 +39,13 @@ def generate_recommendations(category_match):
 
 
 
-def calculate_match(resume_skills, job_skills):
+def calculate_match(resume_skills, job_skills, weights=None):
+    """
+    Rule-based skill matching.
+    weights: optional dict of category -> weight. If None, uses default WEIGHTS.
+    """
+    use_weights = weights if weights else WEIGHTS
+
     result = {
         "category_match": {},
         "overall_match_percentage": 0
@@ -49,7 +68,7 @@ def calculate_match(resume_skills, job_skills):
         else:
             percentage = 0
 
-        weight = WEIGHTS.get(category, 0)
+        weight = use_weights.get(category, 0)
 
         weighted_score += ((percentage/100) * weight)
         total_weight += weight
@@ -60,13 +79,69 @@ def calculate_match(resume_skills, job_skills):
             "percentage": round(percentage, 2),
             "weight": weight
         }
-        
+
     if total_weight > 0:
         result["overall_match_percentage"] = round((weighted_score / total_weight)*100, 2)
 
     result["recommendations"] = generate_recommendations(result["category_match"])
 
-    return result    
+    return result
+
+
+def calculate_hybrid_match(resume_skills, job_skills, resume_text=None, job_text=None):
+    """
+    Hybrid matcher: domain detection + domain weights + rule score + AI semantic score.
+    Falls back to rule-based only if AI modules fail.
+    """
+    try:
+        from analyzer.domain_detector import detect_domain
+        from analyzer.ai_matcher import semantic_similarity
+        from analyzer.skill_expander import expand_skills
+    except ImportError:
+        return _hybrid_fallback(resume_skills, job_skills)
+
+    domain = detect_domain(job_skills)
+    domain_weights = _load_domain_weights(domain)
+    weights = domain_weights if domain_weights else WEIGHTS
+
+    expanded_resume_skills = resume_skills
+    try:
+        expanded_resume_skills = expand_skills(dict(resume_skills))
+    except Exception:
+        pass
+
+    rule_result = calculate_match(expanded_resume_skills, job_skills, weights=weights)
+    rule_score = rule_result["overall_match_percentage"]
+
+    ai_score = None
+    if resume_text is not None and job_text is not None:
+        ai_score = semantic_similarity(resume_text, job_text)
+
+    if ai_score is not None:
+
+        hybrid_score = (rule_score * 0.6) + (ai_score * 0.4)
+
+        # Never penalize perfect rule matches
+        final_score = round(max(rule_score, hybrid_score), 2)
+
+    else:
+        final_score = rule_score
+
+    result = dict(rule_result)
+    result["domain"] = domain
+    result["rule_score"] = rule_score
+    result["ai_similarity"] = ai_score
+    result["overall_match_percentage"] = final_score
+    return result
+
+
+def _hybrid_fallback(resume_skills, job_skills):
+    """Fallback when AI modules unavailable - rule-based only."""
+    rule_result = calculate_match(resume_skills, job_skills)
+    rule_result["domain"] = "IT"
+    rule_result["rule_score"] = rule_result["overall_match_percentage"]
+    rule_result["ai_similarity"] = None
+    return rule_result    
 
 
 # CATEGORY_WEIGHTS = {

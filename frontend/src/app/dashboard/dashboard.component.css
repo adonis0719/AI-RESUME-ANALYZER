@@ -367,6 +367,40 @@
   margin-bottom: 20px;
 }
 
+.score-breakdown {
+  max-width: 320px;
+  margin: 0 auto 20px;
+  padding: 16px 20px;
+  background: var(--bg-card-alt);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 0.95rem;
+}
+
+.breakdown-label {
+  color: var(--text-secondary);
+}
+
+.breakdown-value {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.domain-badge {
+  background: rgba(59, 130, 246, 0.2);
+  color: var(--color-primary);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
 /* Professional progress bar */
 .progress-bar-pro {
   max-width: 420px;
