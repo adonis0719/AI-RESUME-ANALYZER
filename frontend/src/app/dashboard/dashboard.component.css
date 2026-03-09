@@ -10,10 +10,10 @@
 }
 
 .dashboard-header { margin-bottom: 32px; }
-.page-title {
+.dashboard-page .page-title {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #f8fafc;
+  color: var(--text-primary);
   margin: 0;
 }
 

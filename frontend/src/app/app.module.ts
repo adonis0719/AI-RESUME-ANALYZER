@@ -17,6 +17,7 @@ import { RecruiterComponent } from './recruiter/recruiter.component';
 import { RecruiterDetailsComponent } from './recruiter-details/recruiter-details.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ProfileComponent } from './profile/profile.component';
     RecruiterComponent,
     RecruiterDetailsComponent,
     ForgotPasswordComponent,
-    ProfileComponent
+    ProfileComponent,
+    ScheduleInterviewComponent
   ],
   imports: [
     BrowserModule,

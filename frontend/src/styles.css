@@ -17,13 +17,24 @@
   --transition: 0.2s ease;
 }
 
-:root, [data-theme="dark"] {
+:root {
   --bg-card: rgba(248, 250, 252, 0.98);
   --bg-card-alt: rgba(241, 245, 249, 0.98);
+  --bg-page: rgba(241, 245, 249, 0.5);
   --bg-input: rgba(226, 232, 240, 0.8);
   --text-primary: #0f172a;
   --text-secondary: #64748b;
   --border-color: rgba(226, 232, 240, 0.6);
+}
+
+[data-theme="dark"] {
+  --bg-card: rgba(30, 41, 59, 0.95);
+  --bg-card-alt: rgba(51, 65, 85, 0.95);
+  --bg-page: rgba(30, 41, 59, 0.5);
+  --bg-input: rgba(51, 65, 85, 0.9);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --border-color: rgba(148, 163, 184, 0.3);
 }
 
 * {

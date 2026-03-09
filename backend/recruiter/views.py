@@ -4,15 +4,14 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from analyzer.pdf_extractor import extract_text_from_pdf
+from analyzer.pdf_extractor import extract_text_from_pdf, extract_email
 from analyzer.skill_extractor import extract_skills
 from matching.matcher import calculate_match
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def bulk_analyze(request):
-
     job_description = request.data.get("job_description")
 
     resumes = request.FILES.getlist("resumes")
@@ -26,7 +25,6 @@ def bulk_analyze(request):
     os.makedirs(temp_folder, exist_ok=True)
 
     for file in resumes:
-
         file_path = os.path.join(temp_folder, file.name)
 
         with open(file_path, "wb+") as destination:
@@ -41,12 +39,17 @@ def bulk_analyze(request):
 
         score = match["overall_match_percentage"]
 
-        results.append({
-            "name": file.name,
-            "score": score,
-            "file_url": f"/media/temp_recruiter/{file.name}",
-            "details": match
-        })
+        email = extract_email(text)
+
+        results.append(
+            {
+                "name": file.name,
+                "score": score,
+                "file_url": f"/media/temp_recruiter/{file.name}",
+                "details": match,
+                "email": email,
+            }
+        )
 
     results = sorted(results, key=lambda x: x["score"], reverse=True)
 

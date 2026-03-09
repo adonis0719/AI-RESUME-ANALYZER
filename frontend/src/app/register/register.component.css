@@ -89,13 +89,13 @@
 .register-page .auth-title {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-primary);
   margin: 0 0 8px;
 }
 
 .register-page .auth-subtitle {
   font-size: 0.95rem;
-  color: #64748b;
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -110,17 +110,17 @@
 }
 
 .register-page .form-group { margin-bottom: 20px; }
-.register-page .form-label { display: block; font-size: 0.9rem; font-weight: 500; color: #334155; margin-bottom: 8px; }
+.register-page .form-label { display: block; font-size: 0.9rem; font-weight: 500; color: var(--text-primary); margin-bottom: 8px; }
 .register-page .input-wrapper { position: relative; }
-.register-page .input-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-size: 1.1rem; }
-.register-page .form-input { width: 100%; padding: 14px 16px 14px 48px; border: 1px solid #e2e8f0; border-radius: 12px; font-size: 1rem; background: #f8fafc; transition: all 0.2s; }
-.register-page .form-input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); background: white; }
+.register-page .input-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); font-size: 1.1rem; }
+.register-page .form-input { width: 100%; padding: 14px 16px 14px 48px; border: 1px solid var(--border-color); border-radius: 12px; font-size: 1rem; background: var(--bg-input); color: var(--text-primary); transition: all 0.2s; }
+.register-page .form-input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); background: var(--bg-input); }
 .register-page .btn-auth-primary { width: 100%; padding: 14px 24px; background: var(--color-primary); border: none; border-radius: 12px; color: white; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 8px; }
 .register-page .btn-auth-primary:hover:not(:disabled) { transform: translateY(-2px); }
 .register-page .btn-auth-primary:disabled { opacity: 0.8; cursor: not-allowed; }
 .register-page .btn-loading { display: inline-flex; align-items: center; gap: 8px; }
 .register-page .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.register-page .auth-footer-text { text-align: center; margin-top: 24px; font-size: 0.95rem; color: #64748b; }
+.register-page .auth-footer-text { text-align: center; margin-top: 24px; font-size: 0.95rem; color: var(--text-secondary); }
 .register-page .auth-footer-text a { color: var(--color-primary); font-weight: 600; text-decoration: none; }
 .register-page .auth-footer-text a:hover { text-decoration: underline; }

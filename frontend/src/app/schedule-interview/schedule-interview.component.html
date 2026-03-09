@@ -1,0 +1,27 @@
+<div class="page-container schedule-page">
+  <header class="schedule-header">
+    <h1 class="page-title">Schedule Interview</h1>
+  </header>
+
+  <div class="schedule-content">
+    <div class="form-group">
+      <label>To</label>
+      <textarea class="form-control" rows="2" [value]="emails.join(', ')" readonly></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Subject</label>
+      <input class="form-control" [(ngModel)]="subject" />
+    </div>
+
+    <div class="form-group">
+      <label>Message</label>
+      <textarea class="form-control" rows="8" [(ngModel)]="message"></textarea>
+    </div>
+
+    <button class="btn btn-primary" (click)="send()" [disabled]="sending">
+      {{ sending ? 'Sending...' : 'Send' }}
+    </button>
+  </div>
+</div>
+

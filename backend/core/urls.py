@@ -18,6 +18,7 @@ from resumes.views import delete_resume_api
 from jobs.views import delete_job_api
 
 from recruiter.views import bulk_analyze
+from accounts.views import send_interview_email
 
 from accounts.views import send_otp, verify_otp
 
@@ -52,6 +53,7 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     # path('api/register/', register_api),
     path('api/recruiter/analyze/', bulk_analyze),
+    path('api/send-interview-email/', send_interview_email),
     path('api/send-otp/', send_otp),
     path('api/verify-otp/', verify_otp),
     path('api/login/', login_user),

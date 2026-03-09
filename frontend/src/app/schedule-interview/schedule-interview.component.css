@@ -1,0 +1,52 @@
+.schedule-page {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--bg-card);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  color: var(--text-primary);
+}
+
+.schedule-header {
+  margin-bottom: 1.5rem;
+}
+
+.schedule-page .page-title {
+  margin: 0;
+  font-size: 1.8rem;
+  color: var(--text-primary);
+}
+
+.schedule-content .form-group {
+  margin-bottom: 1rem;
+}
+
+.schedule-content .form-group label {
+  color: var(--text-primary);
+}
+
+.schedule-content .form-control {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  font-size: 0.95rem;
+  background: var(--bg-input);
+  color: var(--text-primary);
+}
+
+.btn.btn-primary {
+  padding: 0.6rem 1.5rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.btn.btn-primary[disabled] {
+  opacity: 0.7;
+  cursor: default;
+}
+

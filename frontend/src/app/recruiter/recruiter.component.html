@@ -33,6 +33,9 @@
           <i class="bi bi-download me-2"></i>Download Report
         </button>
         <button class="btn-clear" (click)="clearResults()">Clear Results</button>
+        <button class="btn-schedule" (click)="scheduleInterview()">
+          <i class="bi bi-calendar-event me-2"></i>Schedule Interview
+        </button>
       </div>
 
       <div class="rank-cards">
@@ -51,6 +54,7 @@
         <h4>Resumes</h4>
         <ul>
           <li *ngFor="let r of results; let i = index">
+            <input type="checkbox" [(ngModel)]="r.selected" class="resume-select-checkbox" />
             <i class="bi bi-file-earmark-pdf"></i>
             <a [href]="'http://127.0.0.1:8000' + r.file_url" target="_blank">{{ r.name }}</a>
             <span class="rank-badge">Rank {{ i + 1 }}</span>

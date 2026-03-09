@@ -299,3 +299,36 @@ def change_password(request):
     user.save()
 
     return Response({"message": "Password updated successfully"})
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def send_interview_email(request):
+    """
+    Send interview invitation emails to a list of candidates.
+    """
+    emails = request.data.get("emails") or []
+    subject = request.data.get("subject")
+    message = request.data.get("message")
+
+    if not isinstance(emails, list):
+        return Response({"error": "emails must be a list"}, status=400)
+
+    if not subject or not message:
+        return Response(
+            {"error": "subject and message are required"},
+            status=400,
+        )
+
+    for email in emails:
+        if not email:
+            continue
+        send_mail(
+            subject,
+            message,
+            settings.EMAIL_HOST_USER,
+            [email],
+        )
+
+    return Response({"message": "Emails sent successfully"})
+
