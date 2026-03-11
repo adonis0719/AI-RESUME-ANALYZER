@@ -74,7 +74,7 @@
           <div class="upload-card">
             <h5>Resume</h5>
             <input class="form-input mb-3" placeholder="Resume Title" [(ngModel)]="resumeTitle">
-            <input class="form-input mb-3" type="file" (change)="onFileSelected($event)">
+             <input class="form-control mb-3" type="file" (change)="onFileSelected($event)">
             <button class="btn-primary" (click)="uploadResume()">
               <i class="bi bi-cloud-upload me-2"></i>Upload Resume
             </button>
