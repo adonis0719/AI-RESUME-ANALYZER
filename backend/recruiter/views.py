@@ -12,28 +12,36 @@ from matching.matcher import calculate_hybrid_match
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def bulk_analyze(request):
-    job_description = request.data.get("job_description")
+    job_description = request.data.get("job_description") or ""
 
     resumes = request.FILES.getlist("resumes")
+    if not resumes:
+        return Response({"error": "No resumes uploaded"}, status=400)
 
     job_skills = extract_skills(job_description)
+    if not job_skills:
+        job_skills = {}
 
     results = []
 
     temp_folder = os.path.join(settings.MEDIA_ROOT, "temp_recruiter")
-
     os.makedirs(temp_folder, exist_ok=True)
 
     for file in resumes:
+        if not file.name:
+            continue
         file_path = os.path.join(temp_folder, file.name)
 
         with open(file_path, "wb+") as destination:
             for chunk in file.chunks():
                 destination.write(chunk)
 
-        text = extract_text_from_pdf(file_path)
+        try:
+            text = extract_text_from_pdf(file_path) or ""
+        except Exception:
+            text = ""
 
-        resume_skills = extract_skills(text)
+        resume_skills = extract_skills(text) or {}
 
         match = calculate_hybrid_match(
             resume_skills,
@@ -43,8 +51,12 @@ def bulk_analyze(request):
         )
 
         score = match["overall_match_percentage"]
+        email = extract_email(text)  # None if not found
 
-        email = extract_email(text)
+        try:
+            os.remove(file_path)
+        except OSError:
+            pass  # Cleanup temp file; ignore if already removed
 
         results.append(
             {

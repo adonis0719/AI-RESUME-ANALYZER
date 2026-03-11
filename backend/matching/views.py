@@ -21,8 +21,8 @@ def compare(request):
         resume_id = request.POST.get('resume_id')
         job_id = request.POST.get('job_id')
 
-        resume = Resume.objects.get(id=resume_id)
-        job = JobDescription.objects.get(id=job_id)
+        resume = Resume.objects.get(id=resume_id, user=request.user)
+        job = JobDescription.objects.get(id=job_id, user=request.user)
 
         result = calculate_match(resume.skills or {}, job.extracted_skills or {})
 
