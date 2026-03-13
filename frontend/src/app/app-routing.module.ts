@@ -8,6 +8,7 @@ import { RecruiterDetailsComponent } from './recruiter-details/recruiter-details
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
+import { AiAssistantComponent } from './ai-assistant/ai-assistant.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'recruiter-details', component: RecruiterDetailsComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'schedule-interview', component: ScheduleInterviewComponent }
+  { path: 'schedule-interview', component: ScheduleInterviewComponent },
+  { path: 'ai-assistant', component: AiAssistantComponent }
 ];
 
 @NgModule({

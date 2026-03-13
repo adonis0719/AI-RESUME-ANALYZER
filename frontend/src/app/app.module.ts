@@ -18,6 +18,7 @@ import { RecruiterDetailsComponent } from './recruiter-details/recruiter-details
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
+import { AiAssistantComponent } from './ai-assistant/ai-assistant.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ScheduleInterviewComponent } from './schedule-interview/schedule-interv
     RecruiterDetailsComponent,
     ForgotPasswordComponent,
     ProfileComponent,
-    ScheduleInterviewComponent
+    ScheduleInterviewComponent,
+    AiAssistantComponent
   ],
   imports: [
     BrowserModule,

@@ -10,7 +10,24 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+
+
 from pathlib import Path
+
+# Load .env file if present (for GEMINI_API_KEY etc.)
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+except ImportError:
+    pass
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -166,3 +183,7 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = 'dummys9645@gmail.com'
 EMAIL_HOST_PASSWORD = 'ecqv izui ipxw jrkt'
+
+# import os
+
+# GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
