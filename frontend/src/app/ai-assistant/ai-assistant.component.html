@@ -8,7 +8,7 @@
     <div class="messages-panel" #messagesContainer>
       <div *ngFor="let msg of messages" class="message-row" [class.user]="msg.sender === 'user'" [class.ai]="msg.sender === 'ai'">
         <div class="message-bubble">
-          <span class="message-text">{{ msg.text }}</span>
+          <span class="message-text" [innerHTML]="formatMessage(msg.text)"></span>
         </div>
       </div>
       <div *ngIf="loading" class="message-row ai">

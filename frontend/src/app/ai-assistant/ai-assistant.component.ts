@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
 import { AiChatService } from '../services/ai-chat.service';
+import { marked } from 'marked';
 
 interface ChatMessage {
   sender: 'user' | 'ai';
@@ -67,6 +68,10 @@ export class AiAssistantComponent implements OnInit, AfterViewChecked {
       this.sendMessage();
     }
   }
+
+  formatMessage(message: string) {
+    return marked.parse(message);
+  }  
 
   private scrollToBottom(): void {
     try {
