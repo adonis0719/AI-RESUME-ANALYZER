@@ -19,16 +19,22 @@ export class AuthService {
 
   }
 
-  saveToken(token: string) {
+  saveToken(token: string, isAdmin = false) {
     localStorage.setItem('access_token', token);
+    localStorage.setItem('is_admin', String(isAdmin));
   }
 
   getToken() {
     return localStorage.getItem('access_token');
   }
 
+  isAdmin(): boolean {
+    return localStorage.getItem('is_admin') === 'true';
+  }
+
   logout() {
     localStorage.removeItem('access_token');
+    localStorage.removeItem('is_admin');
   }
 
   getResumes() {

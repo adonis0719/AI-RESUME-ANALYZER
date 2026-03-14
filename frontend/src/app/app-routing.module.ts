@@ -9,6 +9,10 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ProfileComponent } from './profile/profile.component';
 import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
 import { AiAssistantComponent } from './ai-assistant/ai-assistant.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AdminResumesComponent } from './admin-resumes/admin-resumes.component';
+import { AdminJobsComponent } from './admin-jobs/admin-jobs.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -20,7 +24,11 @@ const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'schedule-interview', component: ScheduleInterviewComponent },
-  { path: 'ai-assistant', component: AiAssistantComponent }
+  { path: 'ai-assistant', component: AiAssistantComponent },
+  { path: 'admin-dashboard', component: AdminDashboardComponent },
+  { path: 'admin-dashboard/users', component: AdminUsersComponent },
+  { path: 'admin-dashboard/resumes', component: AdminResumesComponent },
+  { path: 'admin-dashboard/jobs', component: AdminJobsComponent }
 ];
 
 @NgModule({

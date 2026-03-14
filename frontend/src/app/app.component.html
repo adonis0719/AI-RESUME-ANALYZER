@@ -1,6 +1,6 @@
 <nav *ngIf="showNavbar" class="app-navbar">
   <div class="nav-inner">
-    <a class="nav-brand" routerLink="/dashboard">
+    <a class="nav-brand" [routerLink]="isAdminRoute ? '/admin-dashboard' : '/dashboard'">
       <span class="nav-brand-icon">A</span>
       <span class="nav-brand-text">AI Resume Analyzer</span>
     </a>
@@ -11,22 +11,50 @@
 
     <div class="nav-collapse collapse" id="mainNav">
       <div class="nav-links">
-        <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
-          <i class="bi bi-grid-1x2-fill"></i>
-          <span>Dashboard</span>
-        </a>
-        <a class="nav-link" routerLink="/recruiter" routerLinkActive="active">
-          <i class="bi bi-briefcase-fill"></i>
-          <span>Recruiter Analyzer</span>
-        </a>
-        <a class="nav-link" routerLink="/profile" routerLinkActive="active">
-          <i class="bi bi-person-fill"></i>
-          <span>Profile</span>
-        </a>
-        <a class="nav-link" routerLink="/ai-assistant" routerLinkActive="active">
-          <i class="bi bi-chat-dots-fill"></i>
-          <span>AI Assistant</span>
-        </a>
+        <ng-container *ngIf="isAdminRoute; else userNav">
+          <a class="nav-link" routerLink="/admin-dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <i class="bi bi-shield-lock-fill"></i>
+            <span>Admin</span>
+          </a>
+          <a class="nav-link" routerLink="/admin-dashboard/users" routerLinkActive="active">
+            <i class="bi bi-people-fill"></i>
+            <span>Users</span>
+          </a>
+          <a class="nav-link" routerLink="/admin-dashboard/resumes" routerLinkActive="active">
+            <i class="bi bi-file-earmark-pdf-fill"></i>
+            <span>Resumes</span>
+          </a>
+          <a class="nav-link" routerLink="/admin-dashboard/jobs" routerLinkActive="active">
+            <i class="bi bi-briefcase-fill"></i>
+            <span>Jobs</span>
+          </a>
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
+            <i class="bi bi-grid-1x2-fill"></i>
+            <span>User Dashboard</span>
+          </a>
+        </ng-container>
+        <ng-template #userNav>
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
+            <i class="bi bi-grid-1x2-fill"></i>
+            <span>Dashboard</span>
+          </a>
+          <a class="nav-link" routerLink="/recruiter" routerLinkActive="active">
+            <i class="bi bi-briefcase-fill"></i>
+            <span>Recruiter Analyzer</span>
+          </a>
+          <a class="nav-link" routerLink="/profile" routerLinkActive="active">
+            <i class="bi bi-person-fill"></i>
+            <span>Profile</span>
+          </a>
+          <a class="nav-link" routerLink="/ai-assistant" routerLinkActive="active">
+            <i class="bi bi-chat-dots-fill"></i>
+            <span>AI Assistant</span>
+          </a>
+          <a *ngIf="authService.isAdmin()" class="nav-link" routerLink="/admin-dashboard" routerLinkActive="active">
+            <i class="bi bi-shield-lock-fill"></i>
+            <span>Admin</span>
+          </a>
+        </ng-template>
         <a class="nav-link nav-link-logout" (click)="logout()">
           <i class="bi bi-box-arrow-right"></i>
           <span>Logout</span>

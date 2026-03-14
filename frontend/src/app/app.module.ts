@@ -19,6 +19,10 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ProfileComponent } from './profile/profile.component';
 import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
 import { AiAssistantComponent } from './ai-assistant/ai-assistant.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AdminResumesComponent } from './admin-resumes/admin-resumes.component';
+import { AdminJobsComponent } from './admin-jobs/admin-jobs.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,11 @@ import { AiAssistantComponent } from './ai-assistant/ai-assistant.component';
     ForgotPasswordComponent,
     ProfileComponent,
     ScheduleInterviewComponent,
-    AiAssistantComponent
+    AiAssistantComponent,
+    AdminDashboardComponent,
+    AdminUsersComponent,
+    AdminResumesComponent,
+    AdminJobsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,62 @@
+<div class="admin-page page-container">
+  <h1 class="admin-title">Users</h1>
+  <p class="admin-subtitle">Manage registered users</p>
+
+  <div *ngIf="error" class="alert alert-danger" role="alert">{{ error }}</div>
+
+  <div class="admin-section">
+    <div class="section-header">
+      <h2 class="section-title">
+        <i class="bi bi-people-fill"></i>
+        All Users
+      </h2>
+      <div class="search-box">
+        <i class="bi bi-search"></i>
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search by username, email, or ID..."
+          [(ngModel)]="searchQuery"
+          (input)="onSearchInput()"
+        />
+      </div>
+    </div>
+    <div class="table-wrapper">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Admin</th>
+            <th>Joined</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let u of filteredUsers">
+            <td>{{ u.id }}</td>
+            <td>{{ u.username || '—' }}</td>
+            <td>{{ u.email || '—' }}</td>
+            <td>
+              <span class="badge" [class.badge-success]="u.is_staff" [class.badge-secondary]="!u.is_staff">
+                {{ u.is_staff ? 'Yes' : 'No' }}
+              </span>
+            </td>
+            <td>{{ u.date_joined | date:'mediumDate' }}</td>
+            <td>
+              <button class="btn-delete" (click)="deleteUser(u.id)" title="Delete user">
+                <i class="bi bi-trash-fill"></i> Delete
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="filteredUsers.length === 0">
+            <td colspan="6" class="empty-cell">
+              {{ searchQuery ? 'No users match your search' : 'No users found' }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

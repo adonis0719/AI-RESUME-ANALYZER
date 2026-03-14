@@ -186,7 +186,8 @@ def login_user(request):
 
     return Response({
         "refresh": str(refresh),
-        "access": str(refresh.access_token)
+        "access": str(refresh.access_token),
+        "is_admin": user.is_staff
     })   
 
 

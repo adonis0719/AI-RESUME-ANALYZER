@@ -25,8 +25,13 @@ export class LoginComponent {
       .subscribe(
         (response: any) => {
           this.loading = false;
-          this.authService.saveToken(response.access);
-          this.router.navigate(['/dashboard']);
+          this.authService.saveToken(response.access, response.is_admin);
+            if (response.is_admin) {
+              this.router.navigate(['/admin-dashboard']);
+            }
+            else{
+              this.router.navigate(['/dashboard']);
+            }
 
           this.authService.getResumes().subscribe(
             res => console.log("Resumes:", res),

@@ -35,6 +35,15 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
+from accounts.admin_api import (
+    admin_users,
+    admin_delete_user,
+    admin_resumes,
+    admin_delete_resume,
+    admin_jobs,
+    admin_delete_job,
+)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -64,8 +73,12 @@ urlpatterns = [
     path('api/profile/', get_profile),
     path('api/profile/update/', update_profile),
     path('api/change-password/',change_password),
-
-
+    path('api/admin/users/', admin_users),
+    path('api/admin/users/<int:user_id>/', admin_delete_user),
+    path('api/admin/resumes/', admin_resumes),
+    path('api/admin/resumes/<int:resume_id>/', admin_delete_resume),
+    path('api/admin/jobs/', admin_jobs),
+    path('api/admin/jobs/<int:job_id>/', admin_delete_job),
 ]
     
 
