@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { AiChatService } from '../services/ai-chat.service';
 import { marked } from 'marked';
 
@@ -19,6 +19,7 @@ export class AiAssistantComponent implements OnInit, AfterViewChecked {
   private shouldScroll = false;
 
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
+  @ViewChildren('messageRow') private messageRows!: QueryList<ElementRef>;
 
   constructor(private aiChatService: AiChatService) {}
 
@@ -31,7 +32,7 @@ export class AiAssistantComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked(): void {
     if (this.shouldScroll) {
-      this.scrollToBottom();
+      this.scrollToLatestMessageStart();
       this.shouldScroll = false;
     }
   }
@@ -73,12 +74,17 @@ export class AiAssistantComponent implements OnInit, AfterViewChecked {
     return marked.parse(message);
   }  
 
-  private scrollToBottom(): void {
+  private scrollToLatestMessageStart(): void {
     try {
-      const el = this.messagesContainer?.nativeElement;
-      if (el) {
-        el.scrollTop = el.scrollHeight;
+      const lastRow = this.messageRows?.last?.nativeElement as HTMLElement | undefined;
+      if (lastRow?.scrollIntoView) {
+        lastRow.scrollIntoView({ block: 'start' });
+        return;
       }
+
+      // Fallback for older browsers / edge cases
+      const container = this.messagesContainer?.nativeElement as HTMLElement | undefined;
+      if (container) container.scrollTop = container.scrollHeight;
     } catch {}
   }
 }

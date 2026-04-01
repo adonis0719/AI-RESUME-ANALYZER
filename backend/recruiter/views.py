@@ -1,5 +1,8 @@
 import os
+import uuid
+
 from django.conf import settings
+from django.utils.text import get_valid_filename
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -30,7 +33,9 @@ def bulk_analyze(request):
     for file in resumes:
         if not file.name:
             continue
-        file_path = os.path.join(temp_folder, file.name)
+        safe_name = get_valid_filename(file.name)
+        stored_name = f"{uuid.uuid4().hex}_{safe_name}"
+        file_path = os.path.join(temp_folder, stored_name)
 
         with open(file_path, "wb+") as destination:
             for chunk in file.chunks():
@@ -53,16 +58,13 @@ def bulk_analyze(request):
         score = match["overall_match_percentage"]
         email = extract_email(text)  # None if not found
 
-        try:
-            os.remove(file_path)
-        except OSError:
-            pass  # Cleanup temp file; ignore if already removed
+        # Keep file on disk so /media/temp_recruiter/... can be opened from the UI.
 
         results.append(
             {
                 "name": file.name,
                 "score": score,
-                "file_url": f"/media/temp_recruiter/{file.name}",
+                "file_url": f"/media/temp_recruiter/{stored_name}",
                 "details": match,
                 "email": email,
             }
