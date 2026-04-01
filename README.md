@@ -30,7 +30,7 @@ This system automates the recruitment process by:
 ## Screenshots
 
 ![Sign-up](assets/sign-up.png)
-![Login ](assets/login.png)
+![Login](assets/login.png)
 
 ### Dashboard
 ![Dashboard](assets/dashboard.png)
