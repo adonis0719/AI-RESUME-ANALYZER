@@ -30,7 +30,12 @@ This system automates the recruitment process by:
 ## Screenshots
 
 ### Dashboard
-![Dashboard](assets/Dashboard.png)
+![Dashboard](assets/dashboard.png)
+
+![Individual Result](assets/Individual Result.png)
+
+
+
 
 ### AI Assistant
 ![AI Chat](assets/ai-chat.png)
@@ -38,8 +43,13 @@ This system automates the recruitment process by:
 ### Recruiter Panel
 ![Recruiter](assets/recruiter.png)
 
+![Interview Schedule](assets/interview schedule.png)
+
 ### Admin Panel
 ![Admin](assets/admin.png)
+![Admin](assets/Admin module (2).png)
+![Admin](assets/Admin module (3).png)
+
 
 ---
 
